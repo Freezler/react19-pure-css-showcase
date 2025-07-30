@@ -1,0 +1,121 @@
+/* Import modern CSS architecture */
+@import "./styles/layers.css";
+@import "./styles/modern-enhancements.css";
+@import "./styles/animations.css";
+@import "./styles/components.css";
+@import "./styles/advanced-apis.css";
+@import "./styles/features.css";
+@import "./styles/react19.css";
+@import "./styles/design-system.css";
+@import "./styles/loading-states.css";
+
+/* Import reusable UI component styles */
+@import "./styles/ui/navigation.css";
+@import "./styles/ui/card.css";
+@import "./styles/ui/button.css";
+@import "./styles/ui/section.css";
+@import "./styles/ui/badge.css";
+@import "./styles/ui/layout.css";
+
+/* Import demo styles */
+@import "./styles/demo.css";
+
+/* ✨ Global App Styles - Modern CSS Enhanced */
+body {
+  background: var(--color-surface);
+  color: var(--color-on-surface);
+  user-select: none; /* Prevent text selection */
+
+  /* Modern text rendering */
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1, "clig" 1, "calt" 1;
+  font-optical-sizing: auto;
+
+  /* Enhanced scrolling */
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--space-xl);
+
+  /* Custom scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) transparent;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--color-surface-variant);
+    border-radius: var(--radius-full);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      180deg,
+      var(--color-primary),
+      var(--color-secondary)
+    );
+    border-radius: var(--radius-full);
+    border: 2px solid var(--color-surface);
+    transition: all var(--transition-fast) ease;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+      180deg,
+      var(--color-primary-hover),
+      var(--color-secondary)
+    );
+    transform: scale(1.1);
+  }
+}
+
+#root {
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height */
+  display: flex;
+  flex-direction: column;
+
+  /* Container queries support */
+  container-type: inline-size;
+  container-name: app-root;
+
+  /* Enhanced focus management */
+  &:focus-within {
+    /* Subtle glow when any element has focus */
+    box-shadow: inset 0 0 0 1px oklch(from var(--color-primary) l c h / 0.1);
+  }
+}
+
+/* ⚡ Performance Optimizations */
+* {
+  /* Hardware acceleration for smoother animations */
+  &:hover,
+  &:focus,
+  &:active {
+    will-change: transform, opacity, background-color;
+  }
+}
+
+/* 🎨 Selection Styling */
+::selection {
+  background: oklch(from var(--color-primary) l c h / 0.2);
+  color: var(--color-on-surface);
+}
+
+::-moz-selection {
+  background: oklch(from var(--color-primary) l c h / 0.2);
+  color: var(--color-on-surface);
+}
+
+/* 🌐 View Transitions */
+@supports (view-transition-name: none) {
+  .page-transition {
+    view-transition-name: page-content;
+  }
+
+  ::view-transition-old(page-content),
+  ::view-transition-new(page-content) {
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}

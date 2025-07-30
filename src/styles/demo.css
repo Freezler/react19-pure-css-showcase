@@ -1,0 +1,216 @@
+/* ✨ Modern CSS Demo Styles */
+@layer components {
+  
+  /* Container Queries Demo */
+  .demo-container-queries {
+    container-type: inline-size;
+    container-name: demo-card;
+    
+    .responsive-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+      
+      @container demo-card (min-width: 500px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      @container demo-card (min-width: 700px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    .grid-item {
+      padding: var(--space-md);
+      background: oklch(from var(--color-primary) l c h / 0.1);
+      border-radius: var(--radius-md);
+      text-align: center;
+      font-size: var(--text-sm);
+    }
+  }
+  
+  /* CSS Nesting Demo */
+  .demo-nesting {
+    .nested-styles-demo {
+      .parent {
+        padding: var(--space-lg);
+        background: oklch(95% 0.02 250);
+        border-radius: var(--radius-lg);
+        
+        .child {
+          margin: var(--space-sm) 0;
+          padding: var(--space-md);
+          background: oklch(from var(--color-secondary) l c h / 0.2);
+          border-radius: var(--radius-md);
+          transition: all var(--transition-standard) ease;
+          
+          &:hover {
+            background: oklch(from var(--color-secondary) l c h / 0.3);
+            transform: translateX(8px);
+          }
+          
+          &.child--special {
+            background: oklch(70% 0.15 320);
+            color: oklch(98% 0.01 320);
+            font-weight: 600;
+            
+            &:hover {
+              background: oklch(65% 0.18 320);
+              transform: translateX(12px) scale(1.02);
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  /* Animations Demo */
+  .demo-animations {
+    > div {
+      margin: var(--space-md) 0;
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      text-align: center;
+      font-weight: 500;
+    }
+    
+    .animate-float {
+      background: oklch(from var(--color-primary) l c h / 0.1);
+      color: var(--color-primary);
+    }
+    
+    .animate-shimmer {
+      background: oklch(from var(--color-success) l c h / 0.1);
+      color: var(--color-success);
+    }
+    
+    .animate-gradient {
+      color: white;
+      font-weight: 600;
+    }
+  }
+  
+  /* Glassmorphism Demo */
+  .glass-demo-container {
+    position: relative;
+    padding: var(--space-2xl);
+    background: 
+      radial-gradient(circle at 20% 80%, oklch(from var(--color-primary) l c h / 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, oklch(from var(--color-secondary) l c h / 0.2) 0%, transparent 50%),
+      linear-gradient(135deg, 
+        oklch(from var(--color-surface) calc(l + 0.02) c h),
+        oklch(from var(--color-surface) calc(l - 0.01) c h));
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.3;
+    }
+    
+    .glass-card {
+      position: relative;
+      z-index: 1;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+  
+  /* Interactive Elements */
+  .morph-button {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      border-radius: var(--radius-full);
+      transform: scale(1.05);
+      background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+    }
+  }
+  
+  /* Modern CSS Features Showcase */
+  .modern-css-showcase {
+    /* CSS Grid with subgrid (where supported) */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
+    
+    @supports (grid-template-rows: subgrid) {
+      .showcase-item {
+        display: grid;
+        grid-template-rows: subgrid;
+      }
+    }
+    
+    /* Modern aspect ratios */
+    .aspect-demo {
+      aspect-ratio: 16 / 9;
+      background: oklch(from var(--color-accent) l c h / 0.2);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Advanced selectors */
+    .has-demo:has(.special-content) {
+      border: 2px solid var(--color-success);
+      
+      .special-content {
+        background: oklch(from var(--color-success) l c h / 0.1);
+      }
+    }
+  }
+  
+  /* Scroll-driven animations */
+  .scroll-demo {
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(2rem);
+      animation: scroll-fade-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 75%;
+    }
+  }
+  
+  /* Color mixing examples */
+  .color-mixing-demo {
+    .mixed-color-1 {
+      background: color-mix(in oklch, var(--color-primary) 70%, var(--color-surface) 30%);
+    }
+    
+    .mixed-color-2 {
+      background: color-mix(in oklch, var(--color-secondary) 60%, var(--color-accent) 40%);
+    }
+  }
+  
+  /* Light-dark function (where supported) */
+  .adaptive-colors {
+    background: light-dark(
+      oklch(98% 0.01 250),
+      oklch(15% 0.01 250)
+    );
+    color: light-dark(
+      oklch(20% 0.01 250),
+      oklch(90% 0.01 250)
+    );
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    text-align: center;
+  }
+}
+
+/* Responsive design with container queries */
+@container (min-width: 600px) {
+  .demo-container-queries .grid-item {
+    font-size: var(--text-base);
+  }
+}
+
+@container (min-width: 800px) {
+  .demo-container-queries {
+    --card-padding: var(--space-2xl);
+  }
+}

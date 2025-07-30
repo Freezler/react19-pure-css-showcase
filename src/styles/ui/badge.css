@@ -1,0 +1,464 @@
+/* ✨ Reusable Badge and Tag Component System */
+@layer components {
+  
+  /* 🏗️ Base Badge Structure */
+  .badge {
+    --badge-bg: var(--color-outline-variant);
+    --badge-color: var(--color-on-surface);
+    --badge-border: transparent;
+    --badge-padding: var(--space-xs) var(--space-sm);
+    --badge-gap: var(--space-xs);
+    --badge-font-size: var(--text-xs);
+    --badge-font-weight: 500;
+    --badge-radius: var(--radius-full);
+    --badge-transition: all var(--transition-fast) ease;
+    
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--badge-gap);
+    padding: var(--badge-padding);
+    font-size: var(--badge-font-size);
+    font-weight: var(--badge-font-weight);
+    line-height: 1;
+    color: var(--badge-color);
+    background: var(--badge-bg);
+    border: 1px solid var(--badge-border);
+    border-radius: var(--badge-radius);
+    transition: var(--badge-transition);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  /* 🎨 Badge Variants */
+  .badge--default {
+    /* Default styling applied in base */
+  }
+
+  .badge--primary {
+    --badge-bg: var(--color-primary);
+    --badge-color: var(--color-on-primary);
+  }
+
+  .badge--secondary {
+    --badge-bg: var(--color-secondary);
+    --badge-color: var(--color-on-secondary);
+  }
+
+  .badge--success {
+    --badge-bg: var(--color-success);
+    --badge-color: var(--color-on-success);
+  }
+
+  .badge--warning {
+    --badge-bg: var(--color-warning);
+    --badge-color: var(--color-on-warning);
+  }
+
+  .badge--error {
+    --badge-bg: var(--color-error);
+    --badge-color: var(--color-on-error);
+  }
+
+  .badge--info {
+    --badge-bg: oklch(from var(--color-primary) l c h / 0.1);
+    --badge-color: var(--color-primary);
+    --badge-border: var(--color-primary);
+  }
+
+  /* 📏 Badge Sizes */
+  .badge--sm {
+    --badge-padding: var(--space-2xs) var(--space-xs);
+    --badge-font-size: var(--text-xs);
+    --badge-gap: var(--space-2xs);
+  }
+
+  .badge--md {
+    /* Default size already applied */
+  }
+
+  .badge--lg {
+    --badge-padding: var(--space-sm) var(--space-md);
+    --badge-font-size: var(--text-sm);
+    --badge-gap: var(--space-sm);
+  }
+
+  /* 🔴 Dot Badge Variant */
+  .badge--dot {
+    --badge-padding: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: relative;
+  }
+
+  .badge--dot.badge--sm {
+    width: 6px;
+    height: 6px;
+  }
+
+  .badge--dot.badge--lg {
+    width: 10px;
+    height: 10px;
+  }
+
+  .badge__dot {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: currentColor;
+    animation: badge-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes badge-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(0.95); }
+  }
+
+  /* 🗑️ Removable Badge */
+  .badge--removable {
+    --badge-padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-sm);
+  }
+
+  .badge__remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    color: currentColor;
+    cursor: pointer;
+    transition: var(--badge-transition);
+    opacity: 0.7;
+    margin-left: var(--space-2xs);
+  }
+
+  .badge__remove:hover {
+    opacity: 1;
+    background: oklch(from currentColor l c h / 0.2);
+  }
+
+  /* 🏗️ Badge Content */
+  .badge__text {
+    flex: 1;
+  }
+
+  .badge__icon {
+    font-size: 0.875em;
+    flex-shrink: 0;
+  }
+
+  .badge__icon--left {
+    margin-right: calc(var(--badge-gap) * -0.5);
+  }
+
+  .badge__icon--right {
+    margin-left: calc(var(--badge-gap) * -0.5);
+  }
+
+  /* 🏷️ Tag Component System */
+  .tag {
+    --tag-bg: var(--color-surface-variant);
+    --tag-color: var(--color-on-surface);
+    --tag-border: var(--color-outline-variant);
+    --tag-padding: var(--space-xs) var(--space-sm);
+    --tag-gap: var(--space-xs);
+    --tag-font-size: var(--text-sm);
+    --tag-font-weight: 500;
+    --tag-radius: var(--radius-md);
+    --tag-transition: all var(--transition-standard) cubic-bezier(0.4, 0, 0.2, 1);
+    
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--tag-gap);
+    padding: var(--tag-padding);
+    font-size: var(--tag-font-size);
+    font-weight: var(--tag-font-weight);
+    line-height: 1;
+    color: var(--tag-color);
+    background: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+    border-radius: var(--tag-radius);
+    transition: var(--tag-transition);
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    
+    /* Custom color support */
+    &[style*="--tag-color"] {
+      --tag-bg: oklch(from var(--tag-color) l c h / 0.1);
+      --tag-color: var(--tag-color);
+      --tag-border: oklch(from var(--tag-color) l c h / 0.2);
+    }
+    
+    /* Button reset when interactive */
+    &[type="button"] {
+      border: 1px solid var(--tag-border);
+      font: inherit;
+      cursor: pointer;
+    }
+  }
+
+  /* 🎨 Tag Variants */
+  .tag--default {
+    /* Default styling applied in base */
+  }
+
+  .tag--outlined {
+    --tag-bg: transparent;
+    --tag-border: var(--color-outline);
+  }
+
+  .tag--filled {
+    --tag-bg: var(--color-primary);
+    --tag-color: var(--color-on-primary);
+    --tag-border: var(--color-primary);
+  }
+
+  .tag--subtle {
+    --tag-bg: oklch(from var(--color-primary) l c h / 0.05);
+    --tag-color: var(--color-primary);
+    --tag-border: transparent;
+  }
+
+  /* 📏 Tag Sizes */
+  .tag--sm {
+    --tag-padding: var(--space-2xs) var(--space-xs);
+    --tag-font-size: var(--text-xs);
+    --tag-gap: var(--space-2xs);
+    --tag-radius: var(--radius-sm);
+  }
+
+  .tag--md {
+    /* Default size already applied */
+  }
+
+  .tag--lg {
+    --tag-padding: var(--space-sm) var(--space-md);
+    --tag-font-size: var(--text-base);
+    --tag-gap: var(--space-sm);
+    --tag-radius: var(--radius-lg);
+  }
+
+  /* 🖱️ Interactive Tag States */
+  .tag--interactive {
+    cursor: pointer;
+    
+    &:hover {
+      --tag-bg: var(--color-surface);
+      --tag-border: var(--color-primary);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    &:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  .tag--selected {
+    --tag-bg: var(--color-primary);
+    --tag-color: var(--color-on-primary);
+    --tag-border: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* 🗑️ Removable Tag */
+  .tag--removable {
+    --tag-padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-sm);
+  }
+
+  .tag__remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    color: currentColor;
+    cursor: pointer;
+    transition: var(--tag-transition);
+    opacity: 0.7;
+    margin-left: var(--space-xs);
+  }
+
+  .tag__remove:hover {
+    opacity: 1;
+    background: oklch(from currentColor l c h / 0.2);
+  }
+
+  /* 🏗️ Tag Content */
+  .tag__text {
+    flex: 1;
+  }
+
+  .tag__icon {
+    font-size: 0.875em;
+    flex-shrink: 0;
+  }
+
+  .tag__icon--left {
+    margin-right: calc(var(--tag-gap) * -0.25);
+  }
+
+  .tag__icon--right {
+    margin-left: calc(var(--tag-gap) * -0.25);
+  }
+
+  /* 📊 Status Badge Variants */
+  .status-badge--online .badge__dot {
+    background: var(--color-success);
+  }
+
+  .status-badge--offline .badge__dot {
+    background: var(--color-outline);
+  }
+
+  .status-badge--busy .badge__dot {
+    background: var(--color-error);
+  }
+
+  .status-badge--away .badge__dot {
+    background: var(--color-warning);
+  }
+
+  .status-badge--loading .badge__dot {
+    background: var(--color-primary);
+    animation: status-loading 1.5s ease-in-out infinite;
+  }
+
+  @keyframes status-loading {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  /* 🔢 Count Badge */
+  .count-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 var(--space-xs);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--color-on-error);
+    background: var(--color-error);
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+  }
+
+  .count-badge--sm {
+    min-width: 16px;
+    height: 16px;
+    font-size: 10px;
+  }
+
+  .count-badge--md {
+    /* Default size already applied */
+  }
+
+  .count-badge--lg {
+    min-width: 22px;
+    height: 22px;
+    font-size: var(--text-sm);
+  }
+
+  /* 📝 Tag List Container */
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    align-items: center;
+  }
+
+  /* 🌙 Theme Variations */
+  [data-theme="dark"] .badge {
+    --badge-bg: oklch(25% 0.02 250);
+  }
+
+  [data-theme="dark"] .tag {
+    --tag-bg: oklch(22% 0.02 250);
+    --tag-border: oklch(32% 0.02 250);
+  }
+
+  [data-theme="dark"] .tag--outlined {
+    --tag-bg: transparent;
+    --tag-border: oklch(35% 0.02 250);
+  }
+
+  [data-theme="dark"] .tag--subtle {
+    --tag-bg: oklch(18% 0.05 250);
+  }
+
+  /* ♿ Accessibility Enhancements */
+  .badge:focus-visible,
+  .tag:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .badge,
+    .tag {
+      border-width: 2px;
+    }
+    
+    .badge--dot {
+      border: 2px solid var(--color-surface);
+    }
+  }
+
+  /* 🎭 Reduced Motion Support */
+  @media (prefers-reduced-motion: reduce) {
+    .badge__dot,
+    .status-badge--loading .badge__dot {
+      animation: none !important;
+    }
+    
+    .tag--interactive:hover {
+      transform: none;
+    }
+    
+    .badge,
+    .tag,
+    .badge__remove,
+    .tag__remove {
+      transition: none !important;
+    }
+  }
+
+  /* 🖨️ Print Styles */
+  @media print {
+    .badge,
+    .tag {
+      color: #000 !important;
+      background: #f0f0f0 !important;
+      border: 1px solid #ccc !important;
+    }
+    
+    .badge__remove,
+    .tag__remove {
+      display: none;
+    }
+    
+    .count-badge {
+      color: #000 !important;
+      background: #ccc !important;
+    }
+  }
+}
