@@ -121,7 +121,7 @@ export function RootComponent() {
                   className="navbar__dropdown-toggle"
                   popovertarget="tech-stack-menu"
                   type="button"
-                  style={{ anchorName: '--tech-button' }}
+                  style={{ anchorName: '--tech-button' } as React.CSSProperties}
                 >
                   Tech Stack ▼
                 </button>
@@ -129,7 +129,7 @@ export function RootComponent() {
                   className="navbar__popover"
                   id="tech-stack-menu" 
                   popover="auto"
-                  anchor="tech-button"
+                  {...({ anchor: "tech-button" } as any)}
                 >
                   <div className="popover__grid">
                     <div className="popover__category">
@@ -295,7 +295,7 @@ export function RootComponent() {
                   className="navbar__dropdown-toggle"
                   popovertarget="examples-menu"
                   type="button"
-                  style={{ anchorName: '--examples-button' }}
+                  style={{ anchorName: '--examples-button' } as React.CSSProperties}
                 >
                   Examples ▼
                 </button>
@@ -303,7 +303,7 @@ export function RootComponent() {
                   className="navbar__popover"
                   id="examples-menu" 
                   popover="auto"
-                  anchor="examples-button"
+                  {...({ anchor: "examples-button" } as any)}
                 >
                   <div className="popover__simple">
                     <ul className="popover__list">
@@ -334,7 +334,7 @@ export function RootComponent() {
                   className="navbar__dropdown-toggle"
                   popovertarget="resources-menu"
                   type="button"
-                  style={{ anchorName: '--resources-button' }}
+                  style={{ anchorName: '--resources-button' } as React.CSSProperties}
                 >
                   Resources ▼
                 </button>
@@ -342,7 +342,7 @@ export function RootComponent() {
                   className="navbar__popover"
                   id="resources-menu" 
                   popover="auto"
-                  anchor="resources-button"
+                  {...({ anchor: "resources-button" } as any)}
                 >
                   <div className="popover__simple">
                     <ul className="popover__list">

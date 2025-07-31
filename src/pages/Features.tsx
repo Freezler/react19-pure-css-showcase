@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { Icon } from '@iconify/react'
+import { useState, useEffect } from 'react'
 import { getAPISupport } from '../lib'
 import { 
   Card, 
@@ -10,7 +11,9 @@ import {
   Stack,
   Grid,
   Cluster,
-  Cover
+  Cover,
+  Button,
+  CodeBlock
 } from '../components/ui'
 
 interface FeatureCard {
@@ -209,6 +212,422 @@ function HeroStats() {
   )
 }
 
+// Tech Stack Section
+function TechStackSection() {
+  const [activeDemo, setActiveDemo] = useState('typescript')
+  
+  const techFeatures = [
+    {
+      id: 'typescript',
+      title: 'TypeScript',
+      icon: 'logos:typescript-icon',
+      description: 'Full type safety across the entire application with advanced TypeScript patterns',
+      code: `interface FeatureCard {
+  id: string
+  title: string
+  status: 'stable' | 'beta' | 'experimental'
+  compatibility: number
+}
+
+// Type-safe component props
+function Card({ feature }: { feature: FeatureCard }) {
+  return <div>{feature.title}</div>
+}`,
+      highlights: ['Advanced Types', 'Strict Mode', 'Type Inference', 'Generic Components']
+    },
+    {
+      id: 'vite',
+      title: 'Vite',
+      icon: 'logos:vitejs',
+      description: 'Lightning-fast development with instant HMR and optimized production builds',
+      code: `// vite.config.ts
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    target: 'esnext',
+    minify: 'esbuild',
+    sourcemap: true
+  },
+  css: {
+    postcss: './postcss.config.js'
+  }
+})`,
+      highlights: ['Hot Module Replacement', 'ES Modules', 'Tree Shaking', 'Code Splitting']
+    },
+    {
+      id: 'router',
+      title: 'TanStack Router',
+      icon: 'mdi:router',
+      description: 'Type-safe routing with automatic code splitting and advanced navigation patterns',
+      code: `// Type-safe route definition
+const featuresRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/features',
+  component: Features,
+})
+
+// Type-safe navigation
+<Link to="/features" activeProps={{ className: 'active' }}>
+  Features
+</Link>`,
+      highlights: ['Type Safety', 'Code Splitting', 'Search Params', 'Nested Routes']
+    }
+  ]
+
+  return (
+    <Section id="typescript" variant="feature">
+      <Container>
+        <Section.Header centered>
+          <Section.Title>Frontend Technology Stack</Section.Title>
+          <Section.Subtitle>
+            Modern development tools and frameworks powering this application
+          </Section.Subtitle>
+        </Section.Header>
+
+        <Section.Content>
+          <Stack gap="xl">
+            {/* Interactive Tech Demo */}
+            <Card variant="feature">
+              <Card.Header>
+                <Cluster gap="md" justify="center">
+                  {techFeatures.map((tech) => (
+                    <Button
+                      key={tech.id}
+                      variant={activeDemo === tech.id ? 'primary' : 'ghost'}
+                      size="sm"
+                      icon={tech.icon}
+                      onClick={() => setActiveDemo(tech.id)}
+                    >
+                      {tech.title}
+                    </Button>
+                  ))}
+                </Cluster>
+              </Card.Header>
+              
+              <Card.Content>
+                {techFeatures.map((tech) => (
+                  activeDemo === tech.id && (
+                    <Stack key={tech.id} gap="lg">
+                      <div>
+                        <h3 className="text-lg font-semibold mb-2">{tech.title}</h3>
+                        <p className="text-muted">{tech.description}</p>
+                      </div>
+                      
+                      <CodeBlock 
+                        code={tech.code}
+                        language="typescript"
+                        showLineNumbers
+                      />
+                      
+                      <Tag.List 
+                        tags={tech.highlights.map((highlight, index) => ({
+                          id: `${tech.id}-${index}`,
+                          label: highlight
+                        }))}
+                        variant="outline"
+                        size="sm"
+                      />
+                    </Stack>
+                  )
+                ))}
+              </Card.Content>
+            </Card>
+          </Stack>
+        </Section.Content>
+      </Container>
+    </Section>
+  )
+}
+
+// Styling Section
+function StylingSection() {
+  const [activeFeature, setActiveFeature] = useState('layers')
+  
+  const stylingFeatures = [
+    {
+      id: 'layers',
+      title: 'CSS Layers',
+      icon: 'mdi:layers',
+      description: 'Organized cascade management for predictable styling',
+      code: `@layer base, components, utilities, animations;
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--color-on-surface);
+  }
+}
+
+@layer components {
+  .navbar {
+    background: var(--color-surface);
+    backdrop-filter: blur(20px);
+  }
+}`,
+      compatibility: 89
+    },
+    {
+      id: 'container-queries',
+      title: 'Container Queries',
+      icon: 'mdi:crop-free',
+      description: 'Element-based responsive design beyond viewport queries',
+      code: `/* Container query responsive card */
+.card-container {
+  container-type: inline-size;
+  container-name: card;
+}
+
+@container card (min-width: 400px) {
+  .card__content {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+  }
+}`,
+      compatibility: 92
+    },
+    {
+      id: 'scope',
+      title: 'CSS @scope',
+      icon: 'mdi:target',
+      description: 'True component-level style isolation and scoping',
+      code: `@scope (.navbar) {
+  /* Styles only apply within .navbar */
+  .button {
+    background: var(--color-primary);
+    border-radius: var(--radius-md);
+  }
+  
+  /* Exclude certain elements */
+  .button:not(.mobile-only) {
+    display: inline-flex;
+  }
+}`,
+      compatibility: 85
+    }
+  ]
+
+  return (
+    <Section id="layers" variant="content">
+      <Container>
+        <Section.Header centered>
+          <Section.Title>Pure CSS Architecture</Section.Title>
+          <Section.Subtitle>
+            Zero framework dependencies - built with modern CSS features
+          </Section.Subtitle>
+        </Section.Header>
+
+        <Section.Content>
+          <Grid columns="1fr 2fr" gap="xl" className="align-start">
+            {/* Feature List */}
+            <Stack gap="sm">
+              {stylingFeatures.map((feature) => (
+                <Card 
+                  key={feature.id}
+                  variant={activeFeature === feature.id ? 'feature' : 'default'}
+                  interactive
+                  onClick={() => setActiveFeature(feature.id)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <Card.Content>
+                    <Cluster gap="sm" align="center">
+                      <Icon icon={feature.icon} className="text-primary" />
+                      <Stack gap="xs">
+                        <span className="font-medium">{feature.title}</span>
+                        <Badge variant="info" size="sm">
+                          {feature.compatibility}% support
+                        </Badge>
+                      </Stack>
+                    </Cluster>
+                  </Card.Content>
+                </Card>
+              ))}
+            </Stack>
+
+            {/* Active Feature Demo */}
+            <Card variant="feature">
+              {stylingFeatures.map((feature) => (
+                activeFeature === feature.id && (
+                  <Card.Content key={feature.id}>
+                    <Stack gap="lg">
+                      <div>
+                        <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+                        <p className="text-muted">{feature.description}</p>
+                      </div>
+                      
+                      <CodeBlock 
+                        code={feature.code}
+                        language="css"
+                        showLineNumbers
+                      />
+                      
+                      <Cluster gap="sm" align="center">
+                        <Badge variant="success">
+                          Modern CSS
+                        </Badge>
+                        <span className="text-sm text-muted">
+                          {feature.compatibility}% browser support
+                        </span>
+                      </Cluster>
+                    </Stack>
+                  </Card.Content>
+                )
+              ))}
+            </Card>
+          </Grid>
+        </Section.Content>
+      </Container>
+    </Section>
+  )
+}
+
+// Advanced APIs Section
+function AdvancedAPIsSection() {
+  return (
+    <Section id="web-platform" variant="feature">
+      <Container>
+        <Section.Header centered>
+          <Section.Title>Advanced Web Platform APIs</Section.Title>  
+          <Section.Subtitle>
+            Cutting-edge browser capabilities and progressive enhancement
+          </Section.Subtitle>
+        </Section.Header>
+
+        <Section.Content>
+          <Grid columns="auto-fit" minWidth="300px" gap="xl">
+            <Card variant="feature" id="performance">
+              <Card.Header icon="mdi:speedometer">
+                <Card.Title>Performance APIs</Card.Title>
+              </Card.Header>
+              <Card.Content>
+                <Stack gap="md">
+                  <Card.Description>
+                    Core Web Vitals monitoring, Performance Observer, and resource optimization
+                  </Card.Description>
+                  <Tag.List 
+                    tags={[
+                      { id: 'cwv', label: 'Core Web Vitals' },
+                      { id: 'observer', label: 'Performance Observer' },
+                      { id: 'navigation', label: 'Navigation Timing' },
+                      { id: 'resource', label: 'Resource Timing' }
+                    ]}
+                    variant="outline"
+                    size="sm"
+                  />
+                </Stack>
+              </Card.Content>
+              <Card.Footer>
+                <Button as={Link} to="/apis" variant="primary" size="sm">
+                  Try Performance APIs
+                </Button>
+              </Card.Footer>
+            </Card>
+
+            <Card variant="feature" id="accessibility">
+              <Card.Header icon="mdi:accessibility">
+                <Card.Title>Accessibility APIs</Card.Title>
+              </Card.Header>
+              <Card.Content>
+                <Stack gap="md">
+                  <Card.Description>
+                    WCAG 2.2 compliance, screen reader support, and inclusive design patterns
+                  </Card.Description>
+                  <Tag.List 
+                    tags={[
+                      { id: 'wcag', label: 'WCAG 2.2 AA' },
+                      { id: 'aria', label: 'ARIA Labels' },
+                      { id: 'focus', label: 'Focus Management' },
+                      { id: 'keyboard', label: 'Keyboard Navigation' }
+                    ]}
+                    variant="outline"
+                    size="sm"
+                  />
+                </Stack>
+              </Card.Content>
+              <Card.Footer>
+                <Button as={Link} to="/apis" variant="primary" size="sm">
+                  Explore Accessibility
+                </Button>
+              </Card.Footer>
+            </Card>
+          </Grid>
+        </Section.Content>
+      </Container>
+    </Section>
+  )
+}
+
+// Build & Deploy Section  
+function BuildDeploySection() {
+  return (
+    <Section id="vite-build" variant="content">
+      <Container>
+        <Section.Header centered>
+          <Section.Title>Build & Deployment Pipeline</Section.Title>
+          <Section.Subtitle>
+            Modern tooling for optimized production builds and seamless deployment
+          </Section.Subtitle>
+        </Section.Header>
+
+        <Section.Content>
+          <Grid columns="auto-fit" minWidth="320px" gap="xl">
+            <Card variant="feature" id="github-actions">
+              <Card.Header icon="mdi:github">
+                <Card.Title>GitHub Actions CI/CD</Card.Title>
+              </Card.Header>
+              <Card.Content>
+                <Stack gap="md">
+                  <Card.Description>
+                    Automated testing, building, and deployment pipeline with GitHub Actions
+                  </Card.Description>
+                  <CodeBlock 
+                    code={`name: Deploy to Vercel
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci && npm run build
+      - uses: amondnet/vercel-action@v25`}
+                    language="yaml"
+                    showLineNumbers={false}
+                  />
+                </Stack>
+              </Card.Content>
+            </Card>
+
+            <Card variant="feature" id="deployment">
+              <Card.Header icon="mdi:rocket-launch">
+                <Card.Title>Vercel Deployment</Card.Title>
+              </Card.Header>
+              <Card.Content>
+                <Stack gap="md">
+                  <Card.Description>
+                    Lightning-fast edge deployment with automatic optimizations and global CDN
+                  </Card.Description>
+                  <Tag.List 
+                    tags={[
+                      { id: 'edge', label: 'Edge Runtime' },
+                      { id: 'cdn', label: 'Global CDN' },
+                      { id: 'ssl', label: 'Automatic SSL' },
+                      { id: 'preview', label: 'Preview Deployments' }
+                    ]}
+                    variant="outline"
+                    size="sm"
+                  />
+                </Stack>
+              </Card.Content>
+            </Card>
+          </Grid>
+        </Section.Content>
+      </Container>
+    </Section>
+  )
+}
+
 export function Features() {
   return (
     <div className="page-container">
@@ -252,6 +671,18 @@ export function Features() {
 
       {/* API Support */}
       <APISupport />
+
+      {/* Tech Stack Deep Dive */}
+      <TechStackSection />
+      
+      {/* Styling Features */}
+      <StylingSection />
+      
+      {/* Advanced APIs */}
+      <AdvancedAPIsSection />
+      
+      {/* Build & Deploy */}
+      <BuildDeploySection />
 
       {/* Getting Started CTA */}
       <Section variant="cta">
