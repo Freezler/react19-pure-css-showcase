@@ -159,9 +159,18 @@ function APISupport() {
         <Section.Content>
           <Grid columns="auto-fit" minWidth="200px" gap="md">
             {Object.entries(apiSupport).map(([api, supported]) => (
-              <Card key={api} variant={supported ? "default" : "default"}>
+              <Card key={api} variant={supported ? "default" : "default"} className="text-center md:text-left">
                 <Card.Content>
-                  <Cluster gap="sm" align="center">
+                  <Stack gap="xs" align="center" className="md:hidden">
+                    <Icon 
+                      icon={supported ? 'mdi:check-circle' : 'mdi:close-circle'} 
+                      className={`text-lg ${supported ? 'text-success' : 'text-error'}`}
+                    />
+                    <span className="text-sm">
+                      {api.replace(/([A-Z])/g, ' $1').trim()}
+                    </span>
+                  </Stack>
+                  <Cluster gap="sm" align="center" className="hidden md:flex">
                     <Icon 
                       icon={supported ? 'mdi:check-circle' : 'mdi:close-circle'} 
                       className={supported ? 'text-success' : 'text-error'}
@@ -187,28 +196,55 @@ function HeroStats() {
   const supportPercentage = Math.round((totalSupported / totalApis) * 100)
 
   return (
-    <Cluster gap="lg" justify="center">
-      <Card variant="stat">
-        <Card.Content>
-          <div className="stat-number">{totalSupported}/{totalApis}</div>
-          <div className="stat-label">APIs Supported</div>
-        </Card.Content>
-      </Card>
+    <>
+      {/* Mobile: Stack vertically */}
+      <Stack gap="md" align="center" className="sm:hidden">
+        <Card variant="stat" className="w-full max-w-xs">
+          <Card.Content>
+            <div className="stat-number">{totalSupported}/{totalApis}</div>
+            <div className="stat-label">APIs Supported</div>
+          </Card.Content>
+        </Card>
+        
+        <Card variant="stat" className="w-full max-w-xs">
+          <Card.Content>
+            <div className="stat-number">{supportPercentage}%</div>
+            <div className="stat-label">Browser Compatibility</div>
+          </Card.Content>
+        </Card>
+        
+        <Card variant="stat" className="w-full max-w-xs">
+          <Card.Content>
+            <div className="stat-number">{features.length}</div>
+            <div className="stat-label">Feature Categories</div>
+          </Card.Content>
+        </Card>
+      </Stack>
       
-      <Card variant="stat">
-        <Card.Content>
-          <div className="stat-number">{supportPercentage}%</div>
-          <div className="stat-label">Browser Compatibility</div>
-        </Card.Content>
-      </Card>
-      
-      <Card variant="stat">
-        <Card.Content>
-          <div className="stat-number">{features.length}</div>
-          <div className="stat-label">Feature Categories</div>
-        </Card.Content>
-      </Card>
-    </Cluster>
+      {/* Desktop: Grid horizontally */}
+      <Grid columns="auto-fit" minWidth="120px" gap="md" className="justify-center hidden sm:grid">
+        <Card variant="stat">
+          <Card.Content>
+            <div className="stat-number">{totalSupported}/{totalApis}</div>
+            <div className="stat-label">APIs Supported</div>
+          </Card.Content>
+        </Card>
+        
+        <Card variant="stat">
+          <Card.Content>
+            <div className="stat-number">{supportPercentage}%</div>
+            <div className="stat-label">Browser Compatibility</div>
+          </Card.Content>
+        </Card>
+        
+        <Card variant="stat">
+          <Card.Content>
+            <div className="stat-number">{features.length}</div>
+            <div className="stat-label">Feature Categories</div>
+          </Card.Content>
+        </Card>
+      </Grid>
+    </>
   )
 }
 
@@ -289,7 +325,24 @@ const featuresRoute = createRoute({
             {/* Interactive Tech Demo */}
             <Card variant="feature">
               <Card.Header>
-                <Cluster gap="md" justify="center">
+                {/* Mobile: Full-width stacked buttons */}
+                <Stack gap="sm" className="sm:hidden">
+                  {techFeatures.map((tech) => (
+                    <Button
+                      key={tech.id}
+                      variant={activeDemo === tech.id ? 'primary' : 'ghost'}
+                      size="md"
+                      icon={tech.icon}
+                      onClick={() => setActiveDemo(tech.id)}
+                      className="w-full justify-start"
+                    >
+                      {tech.title}
+                    </Button>
+                  ))}
+                </Stack>
+                
+                {/* Desktop: Horizontal cluster */}
+                <Cluster gap="md" justify="center" wrap className="hidden sm:flex">
                   {techFeatures.map((tech) => (
                     <Button
                       key={tech.id}
@@ -418,33 +471,43 @@ function StylingSection() {
         </Section.Header>
 
         <Section.Content>
-          <Grid columns="1fr 2fr" gap="xl" className="align-start">
-            {/* Feature List */}
-            <Stack gap="sm">
-              {stylingFeatures.map((feature) => (
-                <Card 
-                  key={feature.id}
-                  variant={activeFeature === feature.id ? 'feature' : 'default'}
-                  interactive
-                  onClick={() => setActiveFeature(feature.id)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <Card.Content>
-                    <Cluster gap="sm" align="center">
-                      <Icon icon={feature.icon} className="text-primary" />
-                      <Stack gap="xs">
-                        <span className="font-medium">{feature.title}</span>
-                        <Badge variant="info" size="sm">
-                          {feature.compatibility}% support
-                        </Badge>
-                      </Stack>
-                    </Cluster>
-                  </Card.Content>
-                </Card>
-              ))}
-            </Stack>
+          <Stack gap="xl">
+            {/* Mobile-First Feature Selection */}
+            <div className="md:hidden">
+              <Stack gap="sm">
+                {stylingFeatures.map((feature) => (
+                  <Button
+                    key={feature.id}
+                    variant={activeFeature === feature.id ? 'primary' : 'ghost'}
+                    size="md"
+                    icon={feature.icon}
+                    onClick={() => setActiveFeature(feature.id)}
+                    className="w-full justify-start"
+                  >
+                    {feature.title}
+                  </Button>
+                ))}
+              </Stack>
+            </div>
+            
+            {/* Desktop: Horizontal selection */}
+            <div className="hidden md:block">
+              <Cluster gap="md" justify="center" wrap>
+                {stylingFeatures.map((feature) => (
+                  <Button
+                    key={feature.id}
+                    variant={activeFeature === feature.id ? 'primary' : 'ghost'}
+                    size="sm"
+                    icon={feature.icon}
+                    onClick={() => setActiveFeature(feature.id)}
+                  >
+                    {feature.title}
+                  </Button>
+                ))}
+              </Cluster>
+            </div>
 
-            {/* Active Feature Demo */}
+            {/* Single full-width demo card */}
             <Card variant="feature">
               {stylingFeatures.map((feature) => (
                 activeFeature === feature.id && (
@@ -455,13 +518,16 @@ function StylingSection() {
                         <p className="text-muted">{feature.description}</p>
                       </div>
                       
-                      <CodeBlock 
-                        code={feature.code}
-                        language="css"
-                        showLineNumbers
-                      />
+                      {/* Responsive code block */}
+                      <div className="overflow-x-auto">
+                        <CodeBlock 
+                          code={feature.code}
+                          language="css"
+                          showLineNumbers
+                        />
+                      </div>
                       
-                      <Cluster gap="sm" align="center">
+                      <Cluster gap="sm" align="center" wrap>
                         <Badge variant="success">
                           Modern CSS
                         </Badge>
@@ -474,7 +540,7 @@ function StylingSection() {
                 )
               ))}
             </Card>
-          </Grid>
+          </Stack>
         </Section.Content>
       </Container>
     </Section>
@@ -494,7 +560,7 @@ function AdvancedAPIsSection() {
         </Section.Header>
 
         <Section.Content>
-          <Grid columns="auto-fit" minWidth="300px" gap="xl">
+          <Grid columns="auto-fit" minWidth="320px" gap="xl">
             <Card variant="feature" id="performance">
               <Card.Header icon="mdi:speedometer">
                 <Card.Title>Performance APIs</Card.Title>
@@ -570,7 +636,7 @@ function BuildDeploySection() {
         </Section.Header>
 
         <Section.Content>
-          <Grid columns="auto-fit" minWidth="320px" gap="xl">
+          <Grid columns="auto-fit" minWidth="350px" gap="xl">
             <Card variant="feature" id="github-actions">
               <Card.Header icon="mdi:github">
                 <Card.Title>GitHub Actions CI/CD</Card.Title>
@@ -658,7 +724,7 @@ export function Features() {
       <Section variant="content" className="scroll-reveal">
         <Container>
           <Section.Content>
-            <Grid columns="auto-fit" minWidth="320px" gap="xl" className="scroll-stagger">
+            <Grid columns="auto-fit" minWidth="350px" gap="lg" className="scroll-stagger">
               {features.map((feature, index) => (
                 <div key={feature.id} className={index % 2 === 0 ? "scroll-slide-in-left" : "scroll-slide-in-right"}>
                   <FeatureCard feature={feature} />
@@ -686,7 +752,7 @@ export function Features() {
 
       {/* Getting Started CTA */}
       <Section variant="cta">
-        <Container size="narrow">
+        <Container>
           <Section.Header centered>
             <Section.Title>Ready to Explore?</Section.Title>
             <Section.Subtitle>
@@ -695,7 +761,7 @@ export function Features() {
           </Section.Header>
 
           <Section.Content>
-            <Grid columns="auto-fit" minWidth="300px" gap="xl">
+            <Grid columns="auto-fit" minWidth="320px" gap="xl">
               <Link to="/react19">
                 <Card variant="feature" interactive>
                   <Card.Header icon="logos:react">
