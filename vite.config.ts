@@ -3,7 +3,26 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig(() => ({
-  plugins: [react()],
+  plugins: [
+    react({
+      babel: {
+        plugins: [
+          [
+            'babel-plugin-react-compiler',
+            {
+              // Production mode - automatically optimize all components
+              compilationMode: 'infer', // Automatically optimize all valid components  
+              panicThreshold: 'none', // More lenient for production
+              sources: (filename) => {
+                // Only compile our source code, not node_modules
+                return filename.includes('src/') && !filename.includes('node_modules')
+              },
+            },
+          ],
+        ],
+      },
+    }),
+  ],
   build: {
     target: 'baseline-widely-available',
     cssCodeSplit: true,

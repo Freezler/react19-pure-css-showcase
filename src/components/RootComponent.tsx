@@ -1,7 +1,6 @@
 import { Icon } from '@iconify/react'
 import { Link, Outlet, useRouterState } from '@tanstack/react-router'
-import { useEffect, useState, useRef } from 'react'
-import { Turn as Hamburger } from 'hamburger-react'
+import { useEffect, useRef, useState } from 'react'
 
 export function RootComponent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -29,14 +28,14 @@ export function RootComponent() {
     const handleScroll = () => {
       const scrollTop = window.scrollY
       const shouldBeScrolled = scrollTop > 20
-      
+
       if (shouldBeScrolled !== isScrolled) {
         setIsScrolled(shouldBeScrolled)
-        
+
         // Add hardware acceleration class for smooth transitions
         if (navRef.current) {
-          navRef.current.style.transform = shouldBeScrolled 
-            ? 'translateZ(0) translateY(0)' 
+          navRef.current.style.transform = shouldBeScrolled
+            ? 'translateZ(0) translateY(0)'
             : 'translateZ(0)'
         }
       }
@@ -74,6 +73,12 @@ export function RootComponent() {
 
   const closeMenu = () => {
     setIsMenuOpen(false)
+    
+    // Return focus to menu toggle button for accessibility
+    const menuToggle = document.querySelector('.navbar__menu-toggle') as HTMLElement
+    if (menuToggle) {
+      menuToggle.focus()
+    }
   }
 
   // Close menu on escape key
@@ -93,20 +98,50 @@ export function RootComponent() {
     closeMenu()
   }, [router.location.pathname])
 
+  // Close menu on click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!isMenuOpen) return
+      
+      const target = event.target as Element
+      const mobileMenu = document.getElementById('mobile-menu')
+      const menuToggle = document.querySelector('.navbar__menu-toggle')
+      
+      // Don't close if clicking on the menu itself or the toggle button
+      if (
+        mobileMenu?.contains(target) || 
+        menuToggle?.contains(target)
+      ) {
+        return
+      }
+      
+      closeMenu()
+    }
+
+    // Listen for both mouse and touch events
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside)
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
+    }
+  }, [isMenuOpen])
+
   const isActive = (path: string) => {
     return router.location.pathname === path
   }
 
   return (
     <div className="app-layout">
-      <header 
+      <header
         ref={navRef}
         className={`navbar ${isScrolled ? 'scrolled' : ''}`}
         role="banner"
       >
         <div className="navbar__container">
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="navbar__brand"
             aria-label="React 19 - Home"
           >
@@ -119,17 +154,17 @@ export function RootComponent() {
               <li className="navbar__dropdown">
                 <button
                   className="navbar__dropdown-toggle"
-                  popovertarget="tech-stack-menu"
+                  popoverTarget="tech-stack-menu"
                   type="button"
-                  style={{ anchorName: '--tech-button' }}
+                  style={{ anchorName: '--tech-button' } as React.CSSProperties}
                 >
                   Tech Stack ▼
                 </button>
-                <div 
+                <div
                   className="navbar__popover"
-                  id="tech-stack-menu" 
+                  id="tech-stack-menu"
                   popover="auto"
-                  anchor="tech-button"
+                  style={{ positionAnchor: '--tech-button' } as React.CSSProperties}
                 >
                   <div className="popover__grid">
                     <div className="popover__category">
@@ -293,17 +328,17 @@ export function RootComponent() {
               <li className="navbar__dropdown">
                 <button
                   className="navbar__dropdown-toggle"
-                  popovertarget="examples-menu"
+                  popoverTarget="examples-menu"
                   type="button"
-                  style={{ anchorName: '--examples-button' }}
+                  style={{ anchorName: '--examples-button' } as React.CSSProperties}
                 >
                   Examples ▼
                 </button>
-                <div 
+                <div
                   className="navbar__popover"
-                  id="examples-menu" 
+                  id="examples-menu"
                   popover="auto"
-                  anchor="examples-button"
+                  style={{ positionAnchor: '--examples-button' } as React.CSSProperties}
                 >
                   <div className="popover__simple">
                     <ul className="popover__list">
@@ -332,17 +367,17 @@ export function RootComponent() {
               <li className="navbar__dropdown">
                 <button
                   className="navbar__dropdown-toggle"
-                  popovertarget="resources-menu"
+                  popoverTarget="resources-menu"
                   type="button"
-                  style={{ anchorName: '--resources-button' }}
+                  style={{ anchorName: '--resources-button' } as React.CSSProperties}
                 >
                   Resources ▼
                 </button>
-                <div 
+                <div
                   className="navbar__popover"
-                  id="resources-menu" 
+                  id="resources-menu"
                   popover="auto"
-                  anchor="resources-button"
+                  style={{ positionAnchor: '--resources-button' } as React.CSSProperties}
                 >
                   <div className="popover__simple">
                     <ul className="popover__list">
@@ -372,7 +407,7 @@ export function RootComponent() {
               title={`Current theme: ${isDarkMode ? 'dark' : 'light'} mode`}
             >
               <Icon
-                icon={isDarkMode ? 'mdi:weather-sunny' : 'mdi:weather-night'}
+                icon={isDarkMode ? 'mdi:white-balance-sunny' : 'mdi:moon-waning-crescent'}
                 className="navbar__theme-icon"
                 aria-hidden="true"
               />
@@ -386,15 +421,21 @@ export function RootComponent() {
               aria-controls="mobile-menu"
               type="button"
             >
-              <Hamburger
-                toggled={isMenuOpen}
-                toggle={setIsMenuOpen}
-                size={24}
-                color="var(--color-on-surface)"
-              />
+              <div className="navbar__hamburger">
+                <div className="navbar__hamburger-line"></div>
+                <div className="navbar__hamburger-line"></div>
+                <div className="navbar__hamburger-line"></div>
+              </div>
             </button>
           </div>
         </div>
+
+        {/* Mobile menu backdrop */}
+        <div 
+          className={`navbar__mobile-backdrop ${isMenuOpen ? 'navbar__mobile-backdrop--open' : ''}`}
+          onClick={closeMenu}
+          aria-hidden="true"
+        />
 
         {/* Mobile menu */}
         <div
@@ -501,7 +542,7 @@ export function RootComponent() {
                   tabIndex={isMenuOpen ? 0 : -1}
                 >
                   <Icon
-                    icon={isDarkMode ? 'mdi:weather-sunny' : 'mdi:weather-night'}
+                    icon={isDarkMode ? 'mdi:white-balance-sunny' : 'mdi:moon-waning-crescent'}
                     className="navbar__mobile-icon"
                     aria-hidden="true"
                   />

@@ -22,10 +22,10 @@ export {
 }
 
 // Import other components
-import { Badge, Tag } from './Badge'
 import { Button } from './Button'
 import { Card } from './Card'
 import { Section } from './Section'
+import { Tag, Badge, Label } from './Tag'
 
 // Card components
 export type {
@@ -46,11 +46,11 @@ export type {
 } from './Section'
 export { Section }
 
-// Badge and Tag components
+// Tag, Badge and Label components
 export type {
-  BadgeProps, CountBadgeProps, StatusBadgeProps, TagListProps, TagProps
-} from './Badge'
-export { Badge, Tag }
+  BadgeProps, CountBadgeProps, TagListProps, TagProps, LabelProps, StatusLabelProps
+} from './Tag'
+export { Badge, Tag, Label }
 
 // CodeBlock component
 export { CodeBlock } from './CodeBlock'
@@ -69,6 +69,7 @@ export const UI = {
   Section,
   Badge,
   Tag,
+  Label,
 
   // Layout utilities (using the individual imports)
   Container,
