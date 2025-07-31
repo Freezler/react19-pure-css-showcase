@@ -4,7 +4,7 @@ import { InteractiveContext } from './InteractiveContext'
 
 export interface CardProps {
   children: ReactNode
-  variant?: 'default' | 'feature' | 'tech' | 'stat' | 'info'
+  variant?: 'default' | 'feature' | 'tech' | 'stat' | 'info' | 'showcase'
   size?: 'sm' | 'md' | 'lg' | 'xl'
   interactive?: boolean
   className?: string

@@ -23,8 +23,7 @@ export function Hero() {
           </div>
 
           <h1 className="hero__title">
-            Build the Future with{' '}
-            <span className="hero__title-accent">Modern React</span>
+            Build the Future with <span className="hero__title-accent">Modern React</span>
           </h1>
 
           <p className="hero__description">
@@ -63,32 +62,36 @@ export function Hero() {
         <div className="hero__visual">
           <div className="hero__code-preview">
             <div className="hero__code-header">
+              <span className="hero__code-title">App.tsx</span>
               <div className="hero__code-dots">
                 <div className="hero__code-dot hero__code-dot--red"></div>
                 <div className="hero__code-dot hero__code-dot--yellow"></div>
                 <div className="hero__code-dot hero__code-dot--green"></div>
               </div>
-              <span className="hero__code-title">App.tsx</span>
             </div>
             <div className="hero__code-content">
               <div className="hero__code-line">
                 <span className="hero__code-keyword">import</span>{' '}
-                <span className="hero__code-string">{'{ useState }'}</span>{' '}
+                <span className="hero__code-text">&#123; Button &#125;</span>{' '}
                 <span className="hero__code-keyword">from</span>{' '}
-                <span className="hero__code-string">'react'</span>
+                <span className="hero__code-string">'./ui'</span>
               </div>
+              <div className="hero__code-line"></div>
               <div className="hero__code-line">
                 <span className="hero__code-keyword">export</span>{' '}
                 <span className="hero__code-keyword">function</span>{' '}
-                <span className="hero__code-function">App</span>() {'{'}
+                <span className="hero__code-function">App</span>
+                <span className="hero__code-text">() &#123;</span>
               </div>
               <div className="hero__code-line hero__code-line--indent">
                 <span className="hero__code-keyword">return</span>{' '}
-                <span className="hero__code-tag">{'<div>'}</span>
-                <span className="hero__code-text">Hello React 19!</span>
-                <span className="hero__code-tag">{'</div>'}</span>
+                <span className="hero__code-tag">&lt;Button&gt;</span>
+                <span className="hero__code-text">Hello!</span>
+                <span className="hero__code-tag">&lt;/Button&gt;</span>
               </div>
-              <div className="hero__code-line">{'}'}</div>
+              <div className="hero__code-line">
+                <span className="hero__code-text">&#125;</span>
+              </div>
             </div>
           </div>
         </div>

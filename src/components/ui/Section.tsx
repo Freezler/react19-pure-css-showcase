@@ -1,9 +1,9 @@
 import { Icon } from '@iconify/react'
-import { ReactNode } from 'react'
+import { JSX, ReactNode } from 'react'
 
 export interface SectionProps {
   children: ReactNode
-  variant?: 'default' | 'hero' | 'feature' | 'cta' | 'content'
+  variant?: 'default' | 'hero' | 'feature' | 'cta' | 'content' | 'showcase'
   size?: 'sm' | 'md' | 'lg' | 'xl'
   className?: string
   id?: string
@@ -38,9 +38,9 @@ export interface SectionContentProps {
   className?: string
 }
 
-export function Section({ 
-  children, 
-  variant = 'default', 
+export function Section({
+  children,
+  variant = 'default',
   size = 'md',
   className = '',
   id
@@ -57,22 +57,22 @@ export function Section({
   )
 }
 
-export function SectionHeader({ 
-  children, 
-  icon, 
+export function SectionHeader({
+  children,
+  icon,
   iconColor,
-  badge, 
+  badge,
   actions,
   centered = false,
-  className = '' 
+  className = ''
 }: SectionHeaderProps) {
   return (
     <div className={`section__header ${centered ? 'section__header--centered' : ''} ${className}`}>
       <div className="section__header-main">
         {icon && (
           <div className="section__icon-wrapper">
-            <Icon 
-              icon={icon} 
+            <Icon
+              icon={icon}
               className="section__icon"
               style={iconColor ? { color: iconColor } : undefined}
             />
@@ -96,15 +96,15 @@ export function SectionHeader({
   )
 }
 
-export function SectionTitle({ 
-  children, 
-  level = 2, 
+export function SectionTitle({
+  children,
+  level = 2,
   size = 'lg',
   gradient = false,
-  className = '' 
+  className = ''
 }: SectionTitleProps) {
   const Tag = `h${level}` as keyof JSX.IntrinsicElements
-  
+
   const titleClasses = `
     section__title section__title--${size}
     ${gradient ? 'section__title--gradient' : ''}
@@ -126,10 +126,10 @@ export function SectionSubtitle({ children, className = '' }: SectionSubtitlePro
   )
 }
 
-export function SectionContent({ 
-  children, 
+export function SectionContent({
+  children,
   maxWidth = 'wide',
-  className = '' 
+  className = ''
 }: SectionContentProps) {
   const contentClasses = `
     section__content section__content--${maxWidth}

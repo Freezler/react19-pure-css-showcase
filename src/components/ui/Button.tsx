@@ -27,10 +27,10 @@ export function Button({
   ...props
 }: ButtonProps) {
   const baseClasses = `
-    btn btn--${variant} btn--${size}
-    ${loading ? 'btn--loading' : ''}
-    ${disabled ? 'btn--disabled' : ''}
-    ${fullWidth ? 'btn--full-width' : ''}
+    button button--${variant} button--${size}
+    ${loading ? 'button--loading' : ''}
+    ${disabled ? 'button--disabled' : ''}
+    ${fullWidth ? 'button--full-width' : ''}
     ${className}
   `.trim()
 
@@ -46,22 +46,22 @@ export function Button({
       disabled={disabled || loading}
       {...props}
     >
-      {loading && <div className="btn__spinner" />}
+      {loading && <div className="button__spinner" />}
       
-      <div className={`btn__content ${loading ? 'btn__content--hidden' : ''}`}>
+      <div className={`button__content ${loading ? 'button__content--hidden' : ''}`}>
         {icon && iconPosition === 'left' && (
-          <Icon icon={icon} className="btn__icon btn__icon--left" />
+          <Icon icon={icon} className="button__icon button__icon--left" />
         )}
         
-        <span className="btn__text">{children}</span>
+        <span className="button__text">{children}</span>
         
         {icon && iconPosition === 'right' && (
-          <Icon icon={icon} className="btn__icon btn__icon--right" />
+          <Icon icon={icon} className="button__icon button__icon--right" />
         )}
       </div>
 
       {/* Ripple effect container */}
-      <span className="btn__ripple" />
+      <span className="button__ripple" />
     </button>
   )
 }
@@ -81,7 +81,7 @@ export function ButtonGroup({
   className = '' 
 }: ButtonGroupProps) {
   return (
-    <div className={`btn-group btn-group--${orientation} btn-group--spacing-${spacing} ${className}`}>
+    <div className={`button-group button-group--${orientation} button-group--spacing-${spacing} ${className}`}>
       {children}
     </div>
   )
@@ -105,7 +105,7 @@ export function IconButton({
     <Button
       variant={variant}
       size={size}
-      className={`btn--icon-only ${className}`}
+      className={`button--icon-only ${className}`}
       {...props}
     >
       <Icon icon={icon} />
@@ -137,25 +137,25 @@ export function LinkButton({
   return (
     <a 
       {...linkProps}
-      className={`btn btn--${buttonProps.variant || 'primary'} btn--${buttonProps.size || 'md'} ${className}`}
+      className={`button button--${buttonProps.variant || 'primary'} button--${buttonProps.size || 'md'} ${className}`}
     >
-      {buttonProps.loading && <div className="btn__spinner" />}
+      {buttonProps.loading && <div className="button__spinner" />}
       
-      <div className={`btn__content ${buttonProps.loading ? 'btn__content--hidden' : ''}`}>
+      <div className={`button__content ${buttonProps.loading ? 'button__content--hidden' : ''}`}>
         {buttonProps.icon && buttonProps.iconPosition === 'left' && (
-          <Icon icon={buttonProps.icon} className="btn__icon btn__icon--left" />
+          <Icon icon={buttonProps.icon} className="button__icon button__icon--left" />
         )}
         
-        <span className="btn__text">{children}</span>
+        <span className="button__text">{children}</span>
         
         {buttonProps.icon && buttonProps.iconPosition === 'right' && (
-          <Icon icon={buttonProps.icon} className="btn__icon btn__icon--right" />
+          <Icon icon={buttonProps.icon} className="button__icon button__icon--right" />
         )}
         
-        {external && <Icon icon="mdi:open-in-new" className="btn__icon btn__icon--right" />}
+        {external && <Icon icon="mdi:open-in-new" className="button__icon button__icon--right" />}
       </div>
 
-      <span className="btn__ripple" />
+      <span className="button__ripple" />
     </a>
   )
 }

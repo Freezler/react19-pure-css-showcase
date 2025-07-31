@@ -90,7 +90,7 @@ const features: FeatureCard[] = [
   }
 ]
 
-function FeatureCard({ feature }: { feature: FeatureCard }) {
+function FeatureCard({ feature, className }: { feature: FeatureCard; className?: string }) {
   const statusVariant = {
     stable: 'success',
     beta: 'warning', 
@@ -99,7 +99,7 @@ function FeatureCard({ feature }: { feature: FeatureCard }) {
 
   return (
     <Link to={feature.route}>
-      <Card variant="feature" interactive className="hover-lift">
+      <Card variant="feature" size="lg" interactive className={`hover-lift ${className || ''}`}>
         <Card.Header icon={feature.icon}>
           <Cluster gap="sm" justify="between" align="center">
             <Card.Title>{feature.title}</Card.Title>
@@ -321,28 +321,9 @@ const featuresRoute = createRoute({
         </Section.Header>
 
         <Section.Content>
-          <Stack gap="xl">
-            {/* Interactive Tech Demo */}
-            <Card variant="feature">
+          <Card variant="feature" interactive>
               <Card.Header>
-                {/* Mobile: Full-width stacked buttons */}
-                <Stack gap="sm" className="sm:hidden">
-                  {techFeatures.map((tech) => (
-                    <Button
-                      key={tech.id}
-                      variant={activeDemo === tech.id ? 'primary' : 'ghost'}
-                      size="md"
-                      icon={tech.icon}
-                      onClick={() => setActiveDemo(tech.id)}
-                      className="w-full justify-start"
-                    >
-                      {tech.title}
-                    </Button>
-                  ))}
-                </Stack>
-                
-                {/* Desktop: Horizontal cluster */}
-                <Cluster gap="md" justify="center" wrap className="hidden sm:flex">
+                <Cluster gap="md" justify="center" wrap>
                   {techFeatures.map((tech) => (
                     <Button
                       key={tech.id}
@@ -362,8 +343,8 @@ const featuresRoute = createRoute({
                   activeDemo === tech.id && (
                     <Stack key={tech.id} gap="lg">
                       <div>
-                        <h3 className="text-lg font-semibold mb-2">{tech.title}</h3>
-                        <p className="text-muted">{tech.description}</p>
+                        <Card.Title>{tech.title}</Card.Title>
+                        <Card.Description>{tech.description}</Card.Description>
                       </div>
                       
                       <CodeBlock 
@@ -385,7 +366,6 @@ const featuresRoute = createRoute({
                 ))}
               </Card.Content>
             </Card>
-          </Stack>
         </Section.Content>
       </Container>
     </Section>
@@ -471,7 +451,7 @@ function StylingSection() {
         </Section.Header>
 
         <Section.Content>
-          <Stack gap="xl">
+          <Stack gap="lg">
             {/* Mobile-First Feature Selection */}
             <div className="md:hidden">
               <Stack gap="sm">
@@ -560,7 +540,7 @@ function AdvancedAPIsSection() {
         </Section.Header>
 
         <Section.Content>
-          <Grid columns="auto-fit" minWidth="320px" gap="xl">
+          <Grid columns="auto-fit" minWidth="380px" gap="lg">
             <Card variant="feature" id="performance">
               <Card.Header icon="mdi:speedometer">
                 <Card.Title>Performance APIs</Card.Title>
@@ -696,39 +676,38 @@ jobs:
 
 export function Features() {
   return (
-    <div className="page-container">
+    <div className="page-transition-container">
       {/* Hero Section */}
-      <Cover 
-        minHeight="70vh"
-        centered={
-          <Container>
-            <Stack gap="xl" align="center">
-              <Icon icon="mdi:rocket" className="hero-icon" />
-              <Section.Header centered>
-                <Section.Title size="3xl" gradient>
-                  Modern Web Features
-                </Section.Title>
-                <Section.Subtitle>
-                  Explore cutting-edge web technologies, React 19 capabilities, and modern development patterns
-                </Section.Subtitle>
-              </Section.Header>
+      <Section variant="hero" size="lg">
+        <Container size="wide">
+          <Stack gap="xl" align="center">
+            <Icon icon="mdi:rocket" className="hero-icon" />
+            <Section.Header centered>
+              <Section.Title size="3xl" gradient>
+                Modern Web Features
+              </Section.Title>
+              <Section.Subtitle>
+                Explore cutting-edge web technologies, React 19 capabilities, and modern development patterns
+              </Section.Subtitle>
+            </Section.Header>
 
-              <HeroStats />
-            </Stack>
-          </Container>
-        }
-      />
+            <HeroStats />
+          </Stack>
+        </Container>
+      </Section>
       
 
       {/* Features Grid */}
-      <Section variant="content" className="scroll-reveal">
+      <Section variant="content">
         <Container>
           <Section.Content>
-            <Grid columns="auto-fit" minWidth="350px" gap="lg" className="scroll-stagger">
+            <Grid columns="auto-fit" minWidth="300px" gap="xl" className="grid--responsive scroll-stagger">
               {features.map((feature, index) => (
-                <div key={feature.id} className={index % 2 === 0 ? "scroll-slide-in-left" : "scroll-slide-in-right"}>
-                  <FeatureCard feature={feature} />
-                </div>
+                <FeatureCard 
+                  key={feature.id} 
+                  feature={feature}
+                  className={`${index % 2 === 0 ? "scroll-slide-in-left" : "scroll-slide-in-right"} hover-glow`}
+                />
               ))}
             </Grid>
           </Section.Content>
@@ -761,33 +740,27 @@ export function Features() {
           </Section.Header>
 
           <Section.Content>
-            <Grid columns="auto-fit" minWidth="320px" gap="xl">
-              <Link to="/react19">
-                <Card variant="feature" interactive>
-                  <Card.Header icon="logos:react">
-                    <Card.Title>Start with React 19</Card.Title>
-                  </Card.Header>
-                  <Card.Content>
-                    <Card.Description>
-                      Explore the latest React features including useOptimistic, useActionState, and Server Actions for modern web development
-                    </Card.Description>
-                  </Card.Content>
-                </Card>
-              </Link>
+            <Cluster gap="lg" justify="center" wrap>
+              <Button 
+                as={Link} 
+                to="/react19" 
+                variant="primary" 
+                size="lg"
+                icon="logos:react"
+              >
+                Start with React 19
+              </Button>
               
-              <Link to="/apis">
-                <Card variant="feature" interactive>
-                  <Card.Header icon="mdi:api">
-                    <Card.Title>Try Advanced APIs</Card.Title>
-                  </Card.Header>
-                  <Card.Content>
-                    <Card.Description>
-                      Interactive demos of modern browser capabilities including View Transitions, Web Workers, and progressive enhancement
-                    </Card.Description>
-                  </Card.Content>
-                </Card>
-              </Link>
-            </Grid>
+              <Button 
+                as={Link} 
+                to="/apis" 
+                variant="outline" 
+                size="lg"
+                icon="mdi:api"
+              >
+                Try Advanced APIs
+              </Button>
+            </Cluster>
           </Section.Content>
         </Container>
       </Section>
