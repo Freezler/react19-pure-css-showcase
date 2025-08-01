@@ -9,8 +9,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-top: -64px; /* Pull hero up behind the navbar */
-  padding-top: 64px; /* Add padding to account for navbar height */
+  padding-top: var(--space-xl);
   
   /* Glassmorphic background */
   background: linear-gradient(
@@ -126,7 +125,7 @@
   gap: var(--space-3xl);
   max-width: var(--container-xl);
   margin: 0 auto;
-  padding: var(--space-2xl) var(--space-lg);
+  padding: var(--space-3xl) var(--space-lg);
   align-items: center;
   width: 100%;
 }
@@ -393,22 +392,16 @@
 
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
-  .hero {
-    margin-top: -64px; /* Same as desktop */
-    padding-top: 140px; /* Even more space on mobile for the navbar and badge */
-    padding-bottom: 96px; /* Fixed 96px spacing */
-    min-height: calc(100vh + 96px); /* Adjusted height for padding */
+  .hero__badge {
+    color: white;
   }
 
-  .hero__content {
-    grid-template-columns: 1fr;
-    gap: var(--space-3xl);
-    text-align: center;
-    padding: var(--space-2xl) var(--space-md);
+  .hero__title {
+    color: white;
   }
-  
-  .hero__code-content {
-    text-align: left;
+
+  .hero__description {
+    color: rgba(255, 255, 255, 0.9);
   }
   
   .hero__actions {
