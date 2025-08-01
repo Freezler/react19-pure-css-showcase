@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
 import { Icon } from '@iconify/react'
+import { useRef, useState } from 'react'
 
 // 🚀 REACT COMPILER VISUAL DEMO - Shows automatic optimization magic!
 export function CompilerDemo() {
@@ -16,8 +16,8 @@ export function CompilerDemo() {
 
   // This expensive calculation is automatically memoized by React Compiler
   const expensiveValue = computeExpensiveValue(count)
-  
-  // These handlers are automatically memoized by React Compiler  
+
+  // These handlers are automatically memoized by React Compiler
   const handleIncrement = () => {
     setIsOptimizing(true)
     setTotalInteractions(prev => prev + 1)
@@ -43,7 +43,7 @@ export function CompilerDemo() {
 
   return (
     <section className="compiler-demo">
-      <div className="container container--narrow">
+      <div className="compiler-demo__bento-grid-container">
         {/* Header */}
         <div className="compiler-demo__header">
           <div className="compiler-demo__badge">
@@ -54,14 +54,14 @@ export function CompilerDemo() {
             <span className="text-accent">Automatic Optimization</span> in Action
           </h2>
           <p className="compiler-demo__subtitle">
-            Watch React Compiler automatically optimize this component - no manual memoization required! 
+            Watch React Compiler automatically optimize this component - no manual memoization required!
             <strong>Every interaction shows real performance gains.</strong>
           </p>
         </div>
 
         {/* Bento Grid Demo Container */}
         <div ref={containerRef} className={`compiler-demo__bento-grid ${isOptimizing ? 'optimizing' : ''}`}>
-          
+
           {/* Stats Panel - Wide Top Row */}
           <div className="compiler-demo__bento-item compiler-demo__bento-item--stats">
             <div className="compiler-demo__bento-header">
@@ -76,7 +76,7 @@ export function CompilerDemo() {
                 <div className="compiler-demo__stat-value">{skippedRenders}</div>
                 <div className="compiler-demo__stat-label">Renders Skipped</div>
               </div>
-              
+
               <div className="compiler-demo__stat-card compiler-demo__stat-card--success">
                 <div className="compiler-demo__stat-icon">
                   <Icon icon="mdi:speedometer" />
@@ -84,7 +84,7 @@ export function CompilerDemo() {
                 <div className="compiler-demo__stat-value">{performanceGain}%</div>
                 <div className="compiler-demo__stat-label">Performance Boost</div>
               </div>
-              
+
               <div className="compiler-demo__stat-card compiler-demo__stat-card--primary">
                 <div className="compiler-demo__stat-icon">
                   <Icon icon="mdi:memory" />
@@ -101,7 +101,7 @@ export function CompilerDemo() {
               <Icon icon="mdi:counter" />
               <span>Interactive Counter</span>
             </div>
-            <button 
+            <button
               className={`compiler-demo__counter-btn ${isOptimizing ? 'optimizing' : ''}`}
               onClick={handleIncrement}
               disabled={isOptimizing}
@@ -125,10 +125,10 @@ export function CompilerDemo() {
               <span>Name Input</span>
             </div>
             <div className="compiler-demo__input-section">
-              <input 
-                type="text" 
-                value={name} 
-                onChange={handleNameChange} 
+              <input
+                type="text"
+                value={name}
+                onChange={handleNameChange}
                 placeholder="Enter your name..."
                 className="compiler-demo__input"
               />
@@ -178,7 +178,7 @@ export function CompilerDemo() {
               <span>Controls</span>
             </div>
             <div className="compiler-demo__actions-content">
-              <button 
+              <button
                 className="button button--ghost compiler-demo__reset"
                 onClick={handleReset}
               >
@@ -213,7 +213,7 @@ export function CompilerDemo() {
             </div>
             <pre className="compiler-demo__code">
 {`// ❌ Manual optimization required
-const expensiveValue = useMemo(() => 
+const expensiveValue = useMemo(() =>
   computeExpensive(count), [count]
 )
 
@@ -257,7 +257,7 @@ const Child = ({ name, count }) => {
 // Child component automatically optimized by React Compiler
 function OptimizedChild({ name, count }: { name: string; count: number }) {
   const renderTime = new Date().toLocaleTimeString()
-  
+
   return (
     <div className="compiler-demo__child">
       <div className="compiler-demo__child-header">
@@ -285,7 +285,7 @@ function OptimizedChild({ name, count }: { name: string; count: number }) {
 // Compact child component for bento grid
 function OptimizedChildBento({ name, count }: { name: string; count: number }) {
   const renderTime = new Date().toLocaleTimeString()
-  
+
   return (
     <div className="compiler-demo__child-bento">
       <div className="compiler-demo__child-data-compact">
