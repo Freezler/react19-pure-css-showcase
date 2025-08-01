@@ -48,9 +48,20 @@ export function Card({
   className = '',
   onClick
 }: CardProps) {
+  // Simple elevated enhancements
+  const elevatedStyles = {
+    default: '',
+    feature: 'elevated--glow-primary',
+    tech: 'elevated--glow-secondary',
+    stat: 'elevated--glow-accent',
+    info: '',
+    showcase: 'elevated--glow-primary'
+  }
+
   const baseClasses = `
     card card--${variant} card--${size}
     ${interactive ? 'card--interactive' : ''}
+    ${elevatedStyles[variant]}
     ${className}
   `.trim()
 

@@ -63,7 +63,7 @@ export function CompilerDemo() {
         <div ref={containerRef} className={`compiler-demo__bento-grid ${isOptimizing ? 'optimizing' : ''}`}>
 
           {/* Stats Panel - Wide Top Row */}
-          <div className="compiler-demo__bento-item compiler-demo__bento-item--stats">
+          <div className="compiler-demo__bento-item compiler-demo__bento-item--stats elevated--glow-primary">
             <div className="compiler-demo__bento-header">
               <Icon icon="mdi:chart-line" />
               <span>Live Performance Metrics</span>
@@ -96,7 +96,7 @@ export function CompilerDemo() {
           </div>
 
           {/* Interactive Counter - Large Left */}
-          <div className="compiler-demo__bento-item compiler-demo__bento-item--counter">
+          <div className="compiler-demo__bento-item compiler-demo__bento-item--counter elevated--glow-secondary">
             <div className="compiler-demo__bento-header">
               <Icon icon="mdi:counter" />
               <span>Interactive Counter</span>
@@ -141,7 +141,7 @@ export function CompilerDemo() {
           </div>
 
           {/* Expensive Calculation - Middle Right */}
-          <div className="compiler-demo__bento-item compiler-demo__bento-item--calculation">
+          <div className="compiler-demo__bento-item compiler-demo__bento-item--calculation rotating-border">
             <div className="compiler-demo__bento-header">
               <Icon icon="mdi:calculator" />
               <span>Auto-Memoized Calculation</span>
@@ -227,7 +227,7 @@ const Child = memo(({ name, count }) => {
             </pre>
           </div>
 
-          <div className="compiler-demo__code-block compiler-demo__code-block--new">
+          <div className="compiler-demo__code-block compiler-demo__code-block--new rotating-border--subtle">
             <div className="compiler-demo__code-header">
               <Icon icon="mdi:check-circle" className="compiler-demo__code-icon compiler-demo__code-icon--success" />
               <span>With React Compiler (Automatic)</span>

@@ -12,6 +12,8 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   fullWidth?: boolean
   className?: string
   particles?: boolean // Enable particle effects on click
+  elevated?: boolean // Enable elevated effects
+  glowEffect?: 'primary' | 'secondary' | 'accent' | 'none' // Glow effects
 }
 
 // Particle creation utility
@@ -51,10 +53,16 @@ export function Button({
   fullWidth = false,
   className = '',
   particles = false,
+  elevated = false,
+  glowEffect = 'none',
   onClick,
   ...props
 }: ButtonProps) {
   const buttonRef = useRef<HTMLButtonElement>(null)
+  
+  // Simple elevated enhancements
+  const elevatedClasses = elevated ? 'elevated' : ''
+  const glowClasses = glowEffect !== 'none' ? `elevated--glow-${glowEffect}` : ''
   
   const baseClasses = `
     button button--${variant} button--${size}
@@ -62,6 +70,8 @@ export function Button({
     ${disabled ? 'button--disabled' : ''}
     ${fullWidth ? 'button--full-width' : ''}
     ${particles ? 'button--particles' : ''}
+    ${elevatedClasses}
+    ${glowClasses}
     ${className}
   `.trim()
 

@@ -341,23 +341,37 @@
   display: flex;
   gap: var(--space-xl);
   margin-top: var(--space-lg);
+  justify-content: center; /* Centered on larger screens */
 }
 
 .hero__stat {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-md) 0; /* Equal padding top and bottom */
 }
 
 .hero__stat-number {
   font-size: var(--text-2xl);
   font-weight: 700;
   color: var(--color-primary);
-  line-height: 1;
+  line-height: 1.2; /* Consistent line height for better spacing */
+  margin-bottom: var(--space-xs); /* Consistent spacing */
+  min-height: 1.2em; /* Ensure consistent height regardless of content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero__stat-label {
   font-size: var(--text-sm);
   color: var(--color-on-surface-variant);
-  margin-top: var(--space-xs);
+  line-height: 1.4; /* Consistent line height */
+  min-height: 1.4em; /* Ensure consistent height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ===== HERO VISUAL/CODE PREVIEW ===== */
@@ -383,11 +397,13 @@
 @keyframes code-glow {
   0%, 100% {
     box-shadow: var(--shadow-2xl);
+    transform: translateY(0px);
   }
   50% {
     box-shadow: 
       var(--shadow-2xl),
       0 0 30px oklch(from var(--color-primary) l c h / 0.3);
+    transform: translateY(-8px);
   }
 }
 
@@ -501,9 +517,30 @@
     font-size: clamp(2rem, 5vw, 2.5rem);
   }
   
-  .hero__stats {
+  .hero__text {
+    display: flex;
     flex-direction: column;
     gap: var(--space-md);
+    height: 100%; /* Take full height to allow stats to center */
+  }
+  
+  .hero__stats {
+    flex-direction: column;
+    gap: var(--space-sm); /* Tighter spacing on mobile */
+    margin: auto 0; /* Center vertically between neighbors */
+    align-items: center; /* Keep centered horizontally on mobile */
+    justify-content: center; /* Center vertically on mobile */
+    flex: 1; /* Take up available space to center properly */
+    display: flex;
+    transform: translateY(-14px); /* 14px less padding on top (8px + 4px + 2px) */
+  }
+  
+  .hero__stat {
+    padding: var(--space-sm) 0; /* Reduced padding on mobile */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Ensure each stat is centered */
   }
   
   .hero__code-preview {

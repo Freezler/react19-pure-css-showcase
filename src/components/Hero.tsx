@@ -2,15 +2,18 @@ import { Icon } from '@iconify/react'
 
 export function Hero() {
   return (
-    <section className="hero">
+    <section className="hero hero-epic-entrance">
+      {/* Scroll Progress Indicator */}
+      <div className="scroll-progress"></div>
+      
       {/* Background gradient with floating elements */}
       <div className="hero__background">
         <div className="hero__floating-elements">
-          <div className="hero__shape hero__shape--1"></div>
-          <div className="hero__shape hero__shape--2"></div>
-          <div className="hero__shape hero__shape--3"></div>
-          <div className="hero__shape hero__shape--4"></div>
-          <div className="hero__shape hero__shape--5"></div>
+          <div className="hero__shape hero__shape--1 parallax-float"></div>
+          <div className="hero__shape hero__shape--2 parallax-float--slow"></div>
+          <div className="hero__shape hero__shape--3 parallax-float--reverse"></div>
+          <div className="hero__shape hero__shape--4 parallax-float"></div>
+          <div className="hero__shape hero__shape--5 parallax-float--slow"></div>
         </div>
       </div>
 
@@ -42,7 +45,7 @@ export function Hero() {
             </button>
           </div>
 
-          <div className="hero__stats">
+          <div className="hero__stats stats-counter">
             <div className="hero__stat">
               <div className="hero__stat-number">99%</div>
               <div className="hero__stat-label">Performance</div>
@@ -60,7 +63,7 @@ export function Hero() {
 
         {/* Visual element - could be an illustration or code preview */}
         <div className="hero__visual">
-          <div className="hero__code-preview">
+          <div className="hero__code-preview code-scroll-reveal">
             <div className="hero__code-header">
               <span className="hero__code-title">App.tsx</span>
               <div className="hero__code-dots">

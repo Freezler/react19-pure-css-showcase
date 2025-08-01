@@ -3,10 +3,13 @@ import { Hero } from '../components/Hero'
 import { CompilerDemo } from '../components/CompilerDemo'
 import { Section, Button, Tag, Badge } from '../components/ui'
 import { useScrollRevealAll } from '../hooks/useScrollReveal'
+import { useScrollAnimations } from '../hooks/useScrollAnimations'
 
 export function Home() {
   // 🎭 Activate scroll reveal magic for all sections!
   useScrollRevealAll()
+  // 🌟 Fallback scroll animations for better browser support
+  useScrollAnimations()
   const features = [
     {
       id: 'architecture',
@@ -44,24 +47,24 @@ export function Home() {
       <Hero />
 
       {/* React Compiler Demo */}
-      <div className="scroll-reveal">
+      <div className="compiler-demo-animate">
         <CompilerDemo />
       </div>
 
       {/* Features section - using design system classes */}
       <section className="section section--feature section--lg scroll-reveal">
         <div className="container container--wide">
-          <div className="section__header section__header--centered scroll-scale-in">
-            <h2 className="section__title section__title--xl">
+          <div className="section__header section__header--centered">
+            <h2 className="section__title section__title--xl scroll-title-reveal">
               Why Choose <span style={{ color: 'var(--color-accent)' }}>React 19</span>?
             </h2>
-            <p className="section__subtitle">
+            <p className="section__subtitle scroll-title-reveal">
               Discover the powerful features that make modern web development faster, safer, and more enjoyable.
             </p>
           </div>
 
           <div className="section__content">
-            <div className="grid grid--auto-fit-lg grid--gap-xl scroll-stagger">
+            <div className="grid grid--auto-fit-lg grid--gap-xl scroll-stagger-cards">
               {features.map((feature, index) => (
                 <div 
                   key={feature.id}
@@ -105,18 +108,18 @@ export function Home() {
       <section className="section section--showcase section--lg scroll-reveal">
 
         <div className="container container--wide">
-          <div className="section__header section__header--centered scroll-slide-in-left">
-            <h2 className="section__title section__title--xl">
+          <div className="section__header section__header--centered">
+            <h2 className="section__title section__title--xl scroll-title-reveal">
               Explore Our <span className="text-accent">Showcase</span>
             </h2>
-            <p className="section__subtitle">
+            <p className="section__subtitle scroll-title-reveal">
               Dive deep into our comprehensive examples, documentation, and interactive demos. 
               Each section is crafted to demonstrate real-world applications of modern web development.
             </p>
           </div>
 
           <div className="section__content">
-            <div className="showcase-grid scroll-stagger">
+            <div className="showcase-grid scroll-stagger-cards">
             
             {/* Card 1 - Tech Stack */}
             <div className="card card--showcase hover-glow">
