@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react'
-import { ButtonHTMLAttributes, ReactNode } from 'react'
+import { ButtonHTMLAttributes, ReactNode, useRef, useCallback } from 'react'
 
 export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'size'> {
   children: ReactNode
@@ -11,6 +11,33 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   iconPosition?: 'left' | 'right'
   fullWidth?: boolean
   className?: string
+  particles?: boolean // Enable particle effects on click
+}
+
+// Particle creation utility
+const createParticle = (container: HTMLElement, x: number, y: number, variant: string) => {
+  const particle = document.createElement('div')
+  const particleType = Math.random() > 0.5 ? 'success' : 'primary'
+  
+  particle.className = `particle particle--${particleType}`
+  particle.style.cssText = `
+    position: absolute;
+    left: ${x - 2}px;
+    top: ${y - 2}px;
+    width: ${Math.random() * 6 + 3}px;
+    height: ${Math.random() * 6 + 3}px;
+    pointer-events: none;
+    z-index: 1000;
+  `
+  
+  container.appendChild(particle)
+  
+  // Remove particle after animation
+  setTimeout(() => {
+    if (particle.parentNode) {
+      particle.parentNode.removeChild(particle)
+    }
+  }, 2000)
 }
 
 export function Button({
@@ -23,24 +50,48 @@ export function Button({
   iconPosition = 'left',
   fullWidth = false,
   className = '',
+  particles = false,
   onClick,
   ...props
 }: ButtonProps) {
+  const buttonRef = useRef<HTMLButtonElement>(null)
+  
   const baseClasses = `
     button button--${variant} button--${size}
     ${loading ? 'button--loading' : ''}
     ${disabled ? 'button--disabled' : ''}
     ${fullWidth ? 'button--full-width' : ''}
+    ${particles ? 'button--particles' : ''}
     ${className}
   `.trim()
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     if (loading || disabled) return
+    
+    // Create particle effect if enabled
+    if (particles && buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect()
+      const container = buttonRef.current
+      
+      // Create multiple particles at click position
+      for (let i = 0; i < 8; i++) {
+        const offsetX = (Math.random() - 0.5) * 60
+        const offsetY = (Math.random() - 0.5) * 60
+        const x = rect.width / 2 + offsetX
+        const y = rect.height / 2 + offsetY
+        
+        setTimeout(() => {
+          createParticle(container, x, y, variant)
+        }, i * 50)
+      }
+    }
+    
     onClick?.(e)
-  }
+  }, [loading, disabled, particles, variant, onClick])
 
   return (
     <button
+      ref={buttonRef}
       className={baseClasses}
       onClick={handleClick}
       disabled={disabled || loading}
