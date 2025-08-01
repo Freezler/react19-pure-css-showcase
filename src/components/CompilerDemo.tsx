@@ -254,34 +254,6 @@ const Child = ({ name, count }) => {
   )
 }
 
-// Child component automatically optimized by React Compiler
-function OptimizedChild({ name, count }: { name: string; count: number }) {
-  const renderTime = new Date().toLocaleTimeString()
-
-  return (
-    <div className="compiler-demo__child">
-      <div className="compiler-demo__child-header">
-        <Icon icon="mdi:baby-face" />
-        <span>Optimized Child Component</span>
-        <div className="compiler-demo__auto-badge compiler-demo__auto-badge--small">
-          <Icon icon="mdi:auto-fix" />
-          Auto-memo
-        </div>
-      </div>
-      <div className="compiler-demo__child-content">
-        <div className="compiler-demo__child-data">
-          <span>Name: <strong>{name}</strong></span>
-          <span>Count: <strong>{count}</strong></span>
-          <span>Last render: <code>{renderTime}</code></span>
-        </div>
-        <div className="compiler-demo__child-note">
-          This component re-renders intelligently - React Compiler automatically prevents unnecessary updates!
-        </div>
-      </div>
-    </div>
-  )
-}
-
 // Compact child component for bento grid
 function OptimizedChildBento({ name, count }: { name: string; count: number }) {
   const renderTime = new Date().toLocaleTimeString()

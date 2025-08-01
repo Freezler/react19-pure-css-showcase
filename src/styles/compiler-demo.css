@@ -80,9 +80,8 @@
 
 /* ===== BENTO GRID CONTAINER ===== */
 .compiler-demo__bento-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, minmax(120px, auto));
+  display: flex;
+  flex-direction: column;
   gap: var(--space-lg);
   padding: var(--space-xl);
   background: linear-gradient(
@@ -97,13 +96,8 @@
   position: relative;
   transition: all var(--transition-normal);
   container-type: inline-size;
-
-  /* Grid Template Areas for Desktop */
-  grid-template-areas:
-    "stats stats stats stats"
-    "counter counter input input"
-    "counter counter calc calc"
-    "child child actions actions";
+  max-width: var(--container-xl);
+  margin: 0 auto;
 
   &.optimizing {
     border-color: var(--color-primary);
@@ -789,6 +783,9 @@
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg),
     inset 0 1px 0 var(--color-surface);
+  max-width: var(--container-xl);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .compiler-demo__code-block {
@@ -965,14 +962,12 @@
   .compiler-demo__bento-grid {
     /* Modern asymmetric bento layout */
     grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: auto 1fr 1fr auto;
+    grid-template-rows: auto 1fr 1fr;
     grid-template-areas:
       "stats stats stats"
       "counter input calc"
-      "counter child actions"
-      ". . .";
+      "counter child actions";
     gap: var(--space-md);
-    min-height: 70vh;
     max-width: 1400px;
     margin: 0 auto;
     padding: var(--space-lg);
@@ -1216,6 +1211,70 @@
     border-radius: var(--radius-lg);
     padding: var(--space-sm);
   }
+}
+
+/* ===== LIGHT MODE BRIGHTNESS OVERRIDES ===== */
+:root:not([data-theme="dark"]) .compiler-demo {
+  background: linear-gradient(
+    180deg,
+    oklch(99% 0.002 285) 0%,
+    oklch(from var(--color-primary) l c h / 0.02) 50%,
+    oklch(99% 0.002 285) 100%
+  );
+}
+
+:root:not([data-theme="dark"]) .compiler-demo__bento-grid {
+  background: linear-gradient(
+    135deg,
+    oklch(99.5% 0.001 285) 0%,
+    oklch(98% 0.003 285) 100%
+  );
+}
+
+:root:not([data-theme="dark"]) .compiler-demo__bento-item {
+  background: linear-gradient(
+    135deg,
+    oklch(99.8% 0.001 285) 0%,
+    oklch(98.5% 0.002 285) 100%
+  );
+}
+
+:root:not([data-theme="dark"]) .compiler-demo__stat-card {
+  background: linear-gradient(
+    135deg,
+    oklch(99.9% 0.001 285) 0%,
+    oklch(99% 0.002 285) 100%
+  );
+  border-color: oklch(92% 0.005 285);
+}
+
+:root:not([data-theme="dark"]) .compiler-demo__code-block {
+  background: linear-gradient(
+    135deg,
+    oklch(97% 0.003 285) 0%,
+    oklch(95% 0.005 285) 100%
+  );
+  border-color: oklch(90% 0.01 285);
+  box-shadow: var(--shadow-md),
+    inset 0 1px 0 oklch(99% 0.001 285);
+}
+
+:root:not([data-theme="dark"]) .compiler-demo__code-header {
+  background: linear-gradient(
+    135deg,
+    oklch(94% 0.005 285) 0%,
+    oklch(92% 0.008 285) 100%
+  );
+  border-bottom-color: oklch(88% 0.01 285);
+}
+
+:root:not([data-theme="dark"]) .compiler-demo__comparison {
+  background: linear-gradient(
+    135deg,
+    oklch(99.5% 0.001 285) 0%,
+    oklch(98% 0.003 285) 100%
+  );
+  border-color: oklch(92% 0.005 285);
 }
 
 /* ===== DARK MODE ENHANCEMENTS - Using theme variables ===== */
