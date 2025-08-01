@@ -20,8 +20,8 @@
 
 .navbar.scrolled {
   background: oklch(from var(--color-surface) l c h / 0.7);
-  box-shadow: 0 4px 20px oklch(from var(--color-primary) l c h / 0.08);
-  border-bottom-color: oklch(from var(--color-primary) l c h / 0.12);
+  box-shadow: var(--shadow-md), 0 4px 20px oklch(from var(--color-primary) l c h / 0.04);
+  border-bottom-color: oklch(from var(--color-primary) l c h / 0.08);
 }
 
 .navbar__container {
@@ -111,7 +111,7 @@
   border: 1px solid oklch(from var(--color-primary) l c h / 0.12);
   border-top: none; /* Connect seamlessly with navbar */
   border-radius: 0 0 var(--radius-lg) var(--radius-lg); /* Only round bottom corners */
-  box-shadow: 0 8px 32px oklch(from var(--color-primary) l c h / 0.08);
+  box-shadow: var(--shadow-lg);
   min-width: 280px;
 
   /* CSS Anchor Positioning - align left borders and connect seamlessly */
@@ -264,8 +264,8 @@
   background: oklch(from var(--color-primary) l c h / 0.9);
   color: var(--color-on-primary);
   transform: translateY(-2px) scale(1.05);
-  box-shadow: var(--shadow-lg),
-    0 0 20px oklch(from var(--color-primary) l c h / 0.3);
+  box-shadow: var(--shadow-md),
+    0 0 12px oklch(from var(--color-primary) l c h / 0.15);
   border-color: oklch(from var(--color-primary) l c h / 0.4);
 
   &::before {
@@ -341,8 +341,8 @@
   background: oklch(from var(--color-primary) l c h / 0.9);
   color: var(--color-on-primary);
   transform: translateY(-2px) scale(1.05);
-  box-shadow: var(--shadow-lg),
-    0 0 20px oklch(from var(--color-primary) l c h / 0.3);
+  box-shadow: var(--shadow-md),
+    0 0 12px oklch(from var(--color-primary) l c h / 0.15);
   border-color: oklch(from var(--color-primary) l c h / 0.4);
 
   &::before {
@@ -434,11 +434,11 @@
   max-height: calc(100vh - 80px);
 
   /* Glassmorphic design matching dropdowns */
-  background: oklch(from var(--color-surface) l c h / 0.6);
+  background: oklch(from var(--color-surface) l c h / 0.8);
   backdrop-filter: blur(24px) saturate(1.8);
   border: 1px solid oklch(from var(--color-primary) l c h / 0.12);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-2xl);
+  box-shadow: var(--shadow-lg);
 
   padding: var(--space-lg);
   overflow-y: auto;
@@ -658,8 +658,8 @@
 [data-theme="dark"] .navbar__theme-toggle:hover,
 [data-theme="dark"] .navbar__menu-toggle:hover {
   background: oklch(from var(--color-primary) l c h / 0.8);
-  box-shadow: var(--shadow-lg),
-    0 0 25px oklch(from var(--color-primary) l c h / 0.4);
+  box-shadow: var(--shadow-md),
+    0 0 20px oklch(from var(--color-primary) l c h / 0.3);
 }
 
 /* Dark mode mobile navigation */
@@ -668,7 +668,15 @@
 }
 
 [data-theme="dark"] .navbar__mobile-menu {
-  background: oklch(from var(--color-surface-dark) l c h / 0.4);
+  background: oklch(from var(--color-surface-dark) l c h / 0.6);
   backdrop-filter: blur(24px) saturate(1.8) brightness(1.2);
   border: 1px solid oklch(from var(--color-primary) l c h / 0.2);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Light mode mobile navigation enhancements */
+[data-theme="light"] .navbar__mobile-menu {
+  background: oklch(from var(--color-surface) l c h / 0.9);
+  border: 1px solid oklch(from var(--color-outline) l c h / 0.3);
+  box-shadow: var(--shadow-md);
 }

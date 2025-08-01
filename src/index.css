@@ -16,6 +16,19 @@
   padding: 0;
 }
 
+/* Enhanced mobile viewport support */
+@supports (height: 100svh) {
+  :root {
+    --vh-fallback: var(--vh-small);
+  }
+}
+
+@supports not (height: 100svh) {
+  :root {
+    --vh-fallback: 100vh;
+  }
+}
+
 html {
   color-scheme: light dark;
   font-family: system-ui, -apple-system, sans-serif;
@@ -106,13 +119,13 @@ body {
   --radius-full: 9999px;
 
   /* ===== SHADOWS ($type: "shadow") ===== */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-    0 10px 10px -5px rgb(0 0 0 / 0.04);
-  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.03);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08),
+    0 4px 6px -4px rgb(0 0 0 / 0.06);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.09),
+    0 10px 10px -5px rgb(0 0 0 / 0.03);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.12);
 
   /* ===== TRANSITIONS ($type: "duration" + "cubicBezier") ===== */
   --duration-fast: 150ms;
@@ -138,6 +151,17 @@ body {
   --container-lg: 1024px;
   --container-xl: 1200px;
   --container-2xl: 1400px;
+  
+  /* Modern viewport units for consistent mobile UX */
+  --vh-small: 100svh; /* Small viewport height */
+  --vh-large: 100lvh; /* Large viewport height */
+  --vh-dynamic: 100dvh; /* Dynamic viewport height */
+  
+  /* Safe area insets for notched devices */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
 
   /* ===== LEGACY ALIASES (for backwards compatibility) ===== */
   --text-xs: var(--font-size-xs);
@@ -328,11 +352,23 @@ body {
 
 [data-theme="light"] {
   --color-surface: oklch(99.405% 0.00011 271.152);
+  --color-surface-variant: oklch(96% 0.005 285);
   --color-on-surface: oklch(20% 0.01 285);
+  --color-on-surface-variant: oklch(45% 0.02 285);
   --color-primary: oklch(65% 0.15 285);
   --color-primary-hover: oklch(60% 0.15 285);
   --color-secondary: oklch(70% 0.12 320);
   --color-accent: oklch(75% 0.18 310);
+  --color-outline: oklch(88% 0.005 285);
+  
+  /* Light mode specific shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.02);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.04), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.06),
+    0 4px 6px -4px rgb(0 0 0 / 0.04);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.07),
+    0 10px 10px -5px rgb(0 0 0 / 0.02);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.10);
 }
 
 /* Main content - no top margin needed, hero will go full screen */

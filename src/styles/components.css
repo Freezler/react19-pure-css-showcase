@@ -446,11 +446,13 @@
   border: 1px solid var(--color-outline);
   color: var(--color-on-surface);
   opacity: 1;
+  box-shadow: var(--shadow-sm);
 }
 
 .card--feature:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
+  border-color: oklch(from var(--color-primary) l c h / 0.3);
 }
 
 .card__header {
@@ -1350,6 +1352,23 @@
   background: oklch(from var(--color-warning) l c h / 0.2);
 }
 
+/* ===== LIGHT MODE ENHANCEMENTS ===== */
+[data-theme="light"] .button {
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="light"] .button:hover:not(:disabled) {
+  box-shadow: var(--shadow-md);
+}
+
+[data-theme="light"] .card {
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="light"] .card:hover {
+  box-shadow: var(--shadow-md);
+}
+
 [data-theme="dark"] .tag--info,
 [data-theme="dark"] .badge--info,
 [data-theme="dark"] .status-label--info {
@@ -1446,10 +1465,46 @@
   }
   
   .button {
-    min-height: 44px;
+    min-height: 48px; /* Increased for better mobile UX */
   }
   
   .button--sm {
-    min-height: 36px;
+    min-height: 44px;
+  }
+  
+  .button--lg {
+    min-height: 56px;
+  }
+}
+
+/* ===== MOBILE UX UTILITIES ===== */
+.mobile-actions {
+  position: sticky;
+  bottom: 0;
+  padding: var(--space-md);
+  padding-bottom: max(var(--space-md), var(--safe-bottom));
+  background: linear-gradient(
+    transparent 0%,
+    oklch(from var(--color-surface) l c h / 0.8) 20%,
+    oklch(from var(--color-surface) l c h / 0.95) 100%
+  );
+  backdrop-filter: blur(8px);
+  margin-top: auto;
+}
+
+.mobile-consistent-spacing {
+  padding-left: max(var(--space-md), var(--safe-left));
+  padding-right: max(var(--space-md), var(--safe-right));
+  padding-bottom: max(var(--space-lg), var(--safe-bottom));
+}
+
+/* Consistent mobile viewport height */
+.full-mobile-height {
+  min-height: var(--vh-fallback);
+}
+
+@supports (height: 100svh) {
+  .full-mobile-height {
+    min-height: 100svh;
   }
 }
