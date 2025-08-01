@@ -1,0 +1,423 @@
+/* 🎯 PROFESSIONAL BENTO GRID - No Layout Shifts, Perfect Fit */
+
+.compiler-demo__bento-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+  height: 480px; /* Fixed height prevents layout shifts */
+  padding: 1.5rem;
+  background: oklch(from var(--color-surface) l c h / 0.5);
+  border-radius: 1rem;
+  backdrop-filter: blur(20px);
+  border: 1px solid oklch(from var(--color-outline) l c h / 0.3);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* ===== 🚀 HERO AREA - Smart Component Demo ===== */
+.bento-hero {
+  grid-column: 1 / 2;
+  grid-row: 1 / 4;
+  background: linear-gradient(135deg, 
+    oklch(from var(--color-primary) l c h / 0.05) 0%,
+    oklch(from var(--color-accent) l c h / 0.02) 100%
+  );
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-hero__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.bento-hero__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-on-surface);
+}
+
+.bento-hero__badge {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--color-success);
+  color: white;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.bento-hero__content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: oklch(from var(--color-surface) l c h / 0.8);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  border: 1px solid oklch(from var(--color-outline) l c h / 0.2);
+  min-height: 0;
+}
+
+/* ===== 📊 METRICS - Performance Stats ===== */
+.bento-metrics {
+  grid-column: 2 / 4;
+  grid-row: 1 / 2;
+  background: linear-gradient(135deg,
+    oklch(from var(--color-secondary) l c h / 0.05) 0%,
+    oklch(from var(--color-primary) l c h / 0.02) 100%
+  );
+  border-radius: 0.75rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.bento-metrics__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-on-surface);
+  flex-shrink: 0;
+}
+
+.bento-metrics__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.75rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.metric-card {
+  background: oklch(from var(--color-surface) l c h / 0.6);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  text-align: center;
+  border: 1px solid oklch(from var(--color-outline) l c h / 0.1);
+}
+
+.metric-card__value {
+  font-size: 1.125rem;
+  font-weight: 800;
+  line-height: 1;
+  min-height: 1.125rem; /* Prevent layout shift */
+}
+
+.metric-card--primary .metric-card__value { color: var(--color-primary); }
+.metric-card--success .metric-card__value { color: var(--color-success); }
+.metric-card--accent .metric-card__value { color: var(--color-accent); }
+
+.metric-card__label {
+  font-size: 0.75rem;
+  color: var(--color-on-surface-variant);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ===== 🧮 CALCULATION - Auto-Memoized Display ===== */
+.bento-calc {
+  grid-column: 2 / 4;
+  grid-row: 2 / 3;
+  background: linear-gradient(135deg,
+    oklch(from var(--color-accent) l c h / 0.05) 0%,
+    oklch(from var(--color-secondary) l c h / 0.02) 100%
+  );
+  border-radius: 0.75rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bento-calc__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-on-surface);
+  flex-shrink: 0;
+}
+
+.bento-calc__display {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: oklch(from var(--color-surface) l c h / 0.6);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.bento-calc__result {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  line-height: 1;
+  font-family: 'SF Mono', monospace;
+  min-height: 1.25rem; /* Prevent layout shift */
+}
+
+.bento-calc__note {
+  font-size: 0.6875rem;
+  color: var(--color-on-surface-variant);
+  font-style: italic;
+  line-height: 1.2;
+}
+
+/* ===== 💬 INPUT SECTION - Dedicated Input Area ===== */
+.bento-input {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+  background: linear-gradient(135deg,
+    oklch(from var(--color-secondary) l c h / 0.06) 0%,
+    oklch(from var(--color-accent) l c h / 0.03) 100%
+  );
+  border-radius: 0.75rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border: 1px solid oklch(from var(--color-secondary) l c h / 0.1);
+}
+
+.bento-input__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-on-surface);
+  flex-shrink: 0;
+}
+
+.bento-input__field {
+  background: oklch(from var(--color-surface) l c h / 0.9);
+  border: 2px solid oklch(from var(--color-secondary) l c h / 0.2);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--color-on-surface);
+  transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 2.5rem;
+  font-weight: 500;
+}
+
+.bento-input__field:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 2px oklch(from var(--color-secondary) l c h / 0.1);
+}
+
+.bento-input__output {
+  background: oklch(from var(--color-secondary) l c h / 0.05);
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--color-on-surface-variant);
+  text-align: center;
+  min-height: 1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== 🎮 BUTTON SECTION - Dedicated Button Area ===== */
+.bento-button {
+  grid-column: 3 / 4;
+  grid-row: 3 / 4;
+  background: linear-gradient(135deg,
+    oklch(from var(--color-primary) l c h / 0.08) 0%,
+    oklch(from var(--color-secondary) l c h / 0.04) 100%
+  );
+  border-radius: 0.75rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border: 1px solid oklch(from var(--color-primary) l c h / 0.1);
+}
+
+.bento-button__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-on-surface);
+  flex-shrink: 0;
+}
+
+.bento-button__action {
+  flex: 1;
+  background: oklch(from var(--color-primary) l c h / 0.1);
+  border: 2px solid oklch(from var(--color-primary) l c h / 0.2);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 4rem;
+}
+
+.bento-button__action:hover {
+  background: oklch(from var(--color-primary) l c h / 0.15);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.bento-button__action:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.bento-button__counter {
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--color-primary);
+}
+
+.bento-button__label {
+  font-size: 0.75rem;
+  color: var(--color-on-surface-variant);
+  text-align: center;
+}
+
+
+/* ===== RESET BUTTON - Floating Action ===== */
+.bento-reset {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--color-surface-variant);
+  border: 1px solid oklch(from var(--color-outline) l c h / 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  color: var(--color-on-surface-variant);
+  z-index: 10;
+}
+
+.bento-reset:hover {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px oklch(from var(--color-primary) l c h / 0.3);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .compiler-demo__bento-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: 200px 120px 100px 100px 100px;
+    height: auto;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .bento-hero {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+  }
+  
+  .bento-metrics {
+    grid-column: 1 / -1;
+    grid-row: 2 / 3;
+  }
+  
+  .bento-calc {
+    grid-column: 1 / -1;
+    grid-row: 3 / 4;
+  }
+  
+  .bento-input {
+    grid-column: 1 / -1;
+    grid-row: 4 / 5;
+  }
+  
+  .bento-button {
+    grid-column: 1 / -1;
+    grid-row: 5 / 6;
+  }
+  
+  .bento-reset {
+    position: static;
+    width: 100%;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+  }
+}
+
+/* ===== LOADING STATES ===== */
+.optimizing .bento-hero__content {
+  position: relative;
+}
+
+.optimizing .bento-hero__content::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: oklch(from var(--color-primary) l c h / 0.05);
+  border-radius: 0.5rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

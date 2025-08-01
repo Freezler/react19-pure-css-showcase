@@ -59,138 +59,100 @@ export function CompilerDemo() {
           </p>
         </div>
 
-        {/* Bento Grid Demo Container */}
+        {/* 🎯 PROFESSIONAL BENTO GRID - No Layout Shifts */}
         <div ref={containerRef} className={`compiler-demo__bento-grid ${isOptimizing ? 'optimizing' : ''}`}>
 
-          {/* Stats Panel - Wide Top Row */}
-          <div className="compiler-demo__bento-item compiler-demo__bento-item--stats elevated--glow-primary">
-            <div className="compiler-demo__bento-header">
-              <Icon icon="mdi:chart-line" />
-              <span>Live Performance Metrics</span>
+          {/* 🚀 HERO - Smart Component Demo */}
+          <div className="bento-hero">
+            <div className="bento-hero__header">
+              <div className="bento-hero__title">
+                <Icon icon="mdi:react" />
+                <span>Smart Component</span>
+              </div>
+              <div className="bento-hero__badge">
+                <Icon icon="mdi:shield-check" />
+                <span>Auto-Optimized</span>
+              </div>
             </div>
-            <div className="compiler-demo__stats-grid">
-              <div className="compiler-demo__stat-card">
-                <div className="compiler-demo__stat-icon">
-                  <Icon icon="mdi:chart-line" />
-                </div>
-                <div className="compiler-demo__stat-value">{skippedRenders}</div>
-                <div className="compiler-demo__stat-label">Renders Skipped</div>
-              </div>
+            <div className="bento-hero__content">
+              <OptimizedChildBento name={name} count={count} />
+            </div>
+          </div>
 
-              <div className="compiler-demo__stat-card compiler-demo__stat-card--success">
-                <div className="compiler-demo__stat-icon">
-                  <Icon icon="mdi:speedometer" />
-                </div>
-                <div className="compiler-demo__stat-value">{performanceGain}%</div>
-                <div className="compiler-demo__stat-label">Performance Boost</div>
+          {/* 📊 METRICS - Performance Stats */}
+          <div className="bento-metrics">
+            <div className="bento-metrics__header">
+              <Icon icon="mdi:speedometer" />
+              <span>Performance Metrics</span>
+            </div>
+            <div className="bento-metrics__grid">
+              <div className="metric-card metric-card--primary">
+                <div className="metric-card__value">{performanceGain}%</div>
+                <div className="metric-card__label">Faster</div>
               </div>
-
-              <div className="compiler-demo__stat-card compiler-demo__stat-card--primary">
-                <div className="compiler-demo__stat-icon">
-                  <Icon icon="mdi:memory" />
-                </div>
-                <div className="compiler-demo__stat-value">{memoizedOperations}</div>
-                <div className="compiler-demo__stat-label">Auto-Memoized</div>
+              <div className="metric-card metric-card--success">
+                <div className="metric-card__value">{skippedRenders}</div>
+                <div className="metric-card__label">Skipped</div>
+              </div>
+              <div className="metric-card metric-card--accent">
+                <div className="metric-card__value">{memoizedOperations}</div>
+                <div className="metric-card__label">Memoized</div>
               </div>
             </div>
           </div>
 
-          {/* Interactive Counter - Large Left */}
-          <div className="compiler-demo__bento-item compiler-demo__bento-item--counter elevated--glow-secondary">
-            <div className="compiler-demo__bento-header">
-              <Icon icon="mdi:counter" />
-              <span>Interactive Counter</span>
+          {/* 🧮 CALC - Auto-Memoized Function */}
+          <div className="bento-calc">
+            <div className="bento-calc__header">
+              <Icon icon="mdi:calculator" />
+              <span>Auto-Memoized</span>
+            </div>
+            <div className="bento-calc__display">
+              <div className="bento-calc__result">{expensiveValue.toLocaleString()}</div>
+              <div className="bento-calc__note">Only recalculates when count changes</div>
+            </div>
+          </div>
+
+          {/* 💬 INPUT SECTION - Dedicated Input Area */}
+          <div className="bento-input">
+            <div className="bento-input__header">
+              <Icon icon="mdi:keyboard" />
+              <span>Live Input</span>
+            </div>
+            <input
+              type="text"
+              value={name}
+              onChange={handleNameChange}
+              placeholder="Type your name..."
+              className="bento-input__field"
+              maxLength={20}
+            />
+            <div className="bento-input__output">
+              Hello, <span className="text-accent">{name}</span>! 👋
+            </div>
+          </div>
+
+          {/* 🎮 BUTTON SECTION - Dedicated Button Area */}
+          <div className="bento-button">
+            <div className="bento-button__header">
+              <Icon icon="mdi:plus-circle" />
+              <span>Increment</span>
             </div>
             <button
-              className={`compiler-demo__counter-btn ${isOptimizing ? 'optimizing' : ''}`}
+              className="bento-button__action"
               onClick={handleIncrement}
               disabled={isOptimizing}
             >
-              {isOptimizing && (
-                <div className="compiler-demo__loading">
-                  <Icon icon="mdi:loading" className="spinning" />
-                </div>
-              )}
-              <span className="compiler-demo__counter-value">{count}</span>
-              <span className="compiler-demo__counter-label">
-                {isOptimizing ? 'Optimizing...' : 'Click to increment'}
-              </span>
+              {isOptimizing && <Icon icon="mdi:loading" className="spinning" />}
+              <span className="bento-button__counter">{count}</span>
+              <span className="bento-button__label">{isOptimizing ? 'Optimizing...' : 'Click to increment'}</span>
             </button>
           </div>
 
-          {/* Name Input - Top Right */}
-          <div className="compiler-demo__bento-item compiler-demo__bento-item--input">
-            <div className="compiler-demo__bento-header">
-              <Icon icon="mdi:account" />
-              <span>Name Input</span>
-            </div>
-            <div className="compiler-demo__input-section">
-              <input
-                type="text"
-                value={name}
-                onChange={handleNameChange}
-                placeholder="Enter your name..."
-                className="compiler-demo__input"
-              />
-              <div className="compiler-demo__output">
-                <span className="compiler-demo__greeting">
-                  Hello, <span className="text-accent">{name}</span>! 👋
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Expensive Calculation - Middle Right */}
-          <div className="compiler-demo__bento-item compiler-demo__bento-item--calculation rotating-border">
-            <div className="compiler-demo__bento-header">
-              <Icon icon="mdi:calculator" />
-              <span>Auto-Memoized Calculation</span>
-              <div className="compiler-demo__auto-badge">
-                <Icon icon="mdi:auto-fix" />
-              </div>
-            </div>
-            <div className="compiler-demo__calculation-display">
-              <div className="compiler-demo__calculation-value">
-                {expensiveValue.toLocaleString()}
-              </div>
-              <div className="compiler-demo__calculation-desc">
-                Complex math automatically optimized
-              </div>
-            </div>
-          </div>
-
-          {/* Child Component - Bottom Left */}
-          <div className="compiler-demo__bento-item compiler-demo__bento-item--child">
-            <div className="compiler-demo__bento-header">
-              <Icon icon="mdi:baby-face" />
-              <span>Optimized Child</span>
-              <div className="compiler-demo__auto-badge compiler-demo__auto-badge--small">
-                <Icon icon="mdi:auto-fix" />
-              </div>
-            </div>
-            <OptimizedChildBento name={name} count={count} />
-          </div>
-
-          {/* Actions - Bottom Right */}
-          <div className="compiler-demo__bento-item compiler-demo__bento-item--actions">
-            <div className="compiler-demo__bento-header">
-              <Icon icon="mdi:cog" />
-              <span>Controls</span>
-            </div>
-            <div className="compiler-demo__actions-content">
-              <button
-                className="button button--ghost compiler-demo__reset"
-                onClick={handleReset}
-              >
-                <Icon icon="mdi:refresh" />
-                Reset Demo
-              </button>
-              <div className="compiler-demo__interactions-count">
-                <span>{totalInteractions}</span>
-                <small>Total Interactions</small>
-              </div>
-            </div>
-          </div>
+          {/* 🔄 RESET - Floating Action */}
+          <button className="bento-reset" onClick={handleReset} title="Reset Demo">
+            <Icon icon="mdi:refresh" />
+          </button>
 
           {/* Optimization Particles */}
           {isOptimizing && (
