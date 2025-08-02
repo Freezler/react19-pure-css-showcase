@@ -1,6 +1,13 @@
 import { Icon } from '@iconify/react'
 import { CodeBlock } from '../components/ui/CodeBlock'
 import { useState } from 'react'
+import { 
+  Section, 
+  Container, 
+  Stack, 
+  Grid,
+  Badge
+} from '../components/ui'
 
 export function TypeScript() {
   const [selectedDemo, setSelectedDemo] = useState<'inference' | 'strict' | 'react19'>('inference')
@@ -136,25 +143,33 @@ function ProfileForm() {
   }
 
   return (
-    <div className="page-container">
-      <div className="page-header">
-        <div className="page-header__content">
-          <div className="page-header__icon">
-            <Icon icon="logos:typescript-icon" />
-          </div>
-          <div className="page-header__text">
-            <h1 className="page-header__title">TypeScript Integration</h1>
-            <p className="page-header__subtitle">
-              Type-safe React development with enhanced developer experience and compile-time error prevention
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="page-content">
+    <div className="page-transition-container">
+      {/* Hero Section */}
+      <Section variant="hero" size="lg">
+        <Container size="wide">
+          <Stack gap="xl" align="center">
+            <Icon icon="logos:typescript-icon" className="text-6xl" />
+            <Section.Header centered>
+              <Section.Title size="3xl" gradient>
+                TypeScript Integration
+              </Section.Title>
+              <Section.Subtitle>
+                Type-safe React development with enhanced developer experience and compile-time error prevention
+              </Section.Subtitle>
+            </Section.Header>
+          </Stack>
+        </Container>
+      </Section>
         {/* TypeScript Benefits Section */}
-        <section className="content-section">
-          <h2 className="section-title">Why TypeScript?</h2>
+        <Section variant="content" size="lg">
+          <Container size="wide">
+            <Section.Header>
+              <Badge variant="primary" icon="mdi:shield-check">
+                Benefits
+              </Badge>
+              <Section.Title size="xl">Why TypeScript?</Section.Title>
+            </Section.Header>
+            <Section.Content>
           <div className="benefits-grid">
             <div className="benefit-card">
               <div className="benefit-card__icon">
@@ -193,11 +208,20 @@ function ProfileForm() {
               </p>
             </div>
           </div>
-        </section>
+            </Section.Content>
+          </Container>
+        </Section>
 
         {/* Interactive Demo Section */}
-        <section className="content-section">
-          <h2 className="section-title">Interactive TypeScript Examples</h2>
+        <Section variant="feature" size="lg">
+          <Container size="wide">
+            <Section.Header>
+              <Badge variant="success" icon="mdi:play">
+                Interactive Demo
+              </Badge>
+              <Section.Title size="xl">Interactive TypeScript Examples</Section.Title>
+            </Section.Header>
+            <Section.Content>
           <div className="demo-tabs">
             <div className="demo-tabs__nav">
               <button
@@ -236,11 +260,20 @@ function ProfileForm() {
               </div>
             </div>
           </div>
-        </section>
+            </Section.Content>
+          </Container>
+        </Section>
 
         {/* TypeScript Configuration */}
-        <section className="content-section">
-          <h2 className="section-title">Our TypeScript Configuration</h2>
+        <Section variant="content" size="lg">
+          <Container size="wide">
+            <Section.Header>
+              <Badge variant="warning" icon="mdi:cog">
+                Configuration
+              </Badge>
+              <Section.Title size="xl">Our TypeScript Configuration</Section.Title>
+            </Section.Header>
+            <Section.Content>
           <div className="config-showcase">
             <div className="config-showcase__content">
               <h3>Optimized for React 19</h3>
@@ -301,11 +334,20 @@ function ProfileForm() {
               />
             </div>
           </div>
-        </section>
+            </Section.Content>
+          </Container>
+        </Section>
 
         {/* Best Practices */}
-        <section className="content-section">
-          <h2 className="section-title">TypeScript Best Practices</h2>
+        <Section variant="cta" size="lg">
+          <Container size="wide">
+            <Section.Header>
+              <Badge variant="info" icon="mdi:lightbulb">
+                Best Practices
+              </Badge>
+              <Section.Title size="xl">TypeScript Best Practices</Section.Title>
+            </Section.Header>
+            <Section.Content>
           <div className="best-practices">
             <div className="practice-card">
               <div className="practice-card__header">
@@ -336,8 +378,9 @@ function ProfileForm() {
               <p>Create reusable components with generics for flexible, type-safe component APIs.</p>
             </div>
           </div>
-        </section>
-      </div>
+            </Section.Content>
+          </Container>
+        </Section>
     </div>
   )
 }

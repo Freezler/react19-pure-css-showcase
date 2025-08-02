@@ -353,6 +353,20 @@ export function RootComponent() {
           id="mobile-menu"
           aria-hidden={!isMenuOpen}
         >
+          <div className="navbar__mobile-header">
+            <button
+              className="navbar__mobile-close"
+              onClick={(e) => {
+                e.stopPropagation()
+                closeMenu()
+              }}
+              aria-label="Close navigation menu"
+              type="button"
+              tabIndex={isMenuOpen ? 0 : -1}
+            >
+              <Icon icon="mdi:close" className="navbar__close-icon" aria-hidden="true" />
+            </button>
+          </div>
           <nav className="navbar__mobile-nav" aria-label="Mobile navigation" role="navigation">
             <ul className="navbar__mobile-list">
               <li>

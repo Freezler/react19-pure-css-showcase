@@ -676,7 +676,8 @@
 
 /* Light mode mobile navigation enhancements */
 [data-theme="light"] .navbar__mobile-menu {
-  background: oklch(from var(--color-surface) l c h / 0.9);
+  background: oklch(from var(--color-surface) l c h / 0.8);
+  backdrop-filter: blur(24px) saturate(1.8);
   border: 1px solid oklch(from var(--color-outline) l c h / 0.3);
   box-shadow: var(--shadow-md);
 }

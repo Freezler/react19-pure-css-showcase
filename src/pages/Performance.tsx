@@ -1,6 +1,13 @@
 import { Icon } from '@iconify/react'
 import { CodeBlock } from '../components/ui/CodeBlock'
 import { useState, useEffect, useTransition, useMemo } from 'react'
+import { 
+  Section, 
+  Container, 
+  Stack, 
+  Grid,
+  Badge
+} from '../components/ui'
 
 export function Performance() {
   const [metrics, setMetrics] = useState<{
@@ -78,25 +85,33 @@ export function Performance() {
   }
 
   return (
-    <div className="page-container">
-      <div className="page-header">
-        <div className="page-header__content">
-          <div className="page-header__icon">
-            <Icon icon="mdi:speedometer" />
-          </div>
-          <div className="page-header__text">
-            <h1 className="page-header__title">Performance Optimization</h1>
-            <p className="page-header__subtitle">
-              Modern performance techniques, Core Web Vitals monitoring, and React 19 optimizations
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="page-content">
+    <div className="page-transition-container">
+      {/* Hero Section */}
+      <Section variant="hero" size="lg">
+        <Container size="wide">
+          <Stack gap="xl" align="center">
+            <Icon icon="mdi:speedometer" className="text-6xl" />
+            <Section.Header centered>
+              <Section.Title size="3xl" gradient>
+                Performance Optimization
+              </Section.Title>
+              <Section.Subtitle>
+                Modern performance techniques, Core Web Vitals monitoring, and React 19 optimizations
+              </Section.Subtitle>
+            </Section.Header>
+          </Stack>
+        </Container>
+      </Section>
         {/* Live Core Web Vitals */}
-        <section className="content-section">
-          <h2 className="section-title">Live Core Web Vitals</h2>
+        <Section variant="content" size="lg">
+          <Container size="wide">
+            <Section.Header>
+              <Badge variant="primary" icon="mdi:chart-line">
+                Real-time Monitoring
+              </Badge>
+              <Section.Title size="xl">Live Core Web Vitals</Section.Title>
+            </Section.Header>
+            <Section.Content>
           <div className="vitals-grid vitals-grid--container-responsive"  data-layout="vitals-monitor">
             <div className={`vital-card vital-card--modern vital-card--${getMetricStatus(metrics.lcp, { good: 2500, poor: 4000 })}`}>
               <div className="vital-card__header">
@@ -135,11 +150,20 @@ export function Performance() {
               <div className="vital-card__threshold">Good: &lt;1.8s</div>
             </div>
           </div>
-        </section>
+            </Section.Content>
+          </Container>
+        </Section>
 
         {/* React 19 Performance Demo */}
-        <section className="content-section">
-          <h2 className="section-title">React 19 Performance Features</h2>
+        <Section variant="feature" size="lg">
+          <Container size="wide">
+            <Section.Header>
+              <Badge variant="success" icon="mdi:react">
+                React 19
+              </Badge>
+              <Section.Title size="xl">React 19 Performance Features</Section.Title>
+            </Section.Header>
+            <Section.Content>
           <div className="performance-demo">
             <div className="demo-section">
               <h3 className="demo-title">
@@ -177,7 +201,9 @@ export function Performance() {
               </div>
             </div>
           </div>
-        </section>
+            </Section.Content>
+          </Container>
+        </Section>
 
         {/* Performance Techniques */}
         <section className="content-section">
@@ -379,7 +405,6 @@ observer.observe({
             </div>
           </div>
         </section>
-      </div>
     </div>
   )
 }

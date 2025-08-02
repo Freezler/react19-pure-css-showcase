@@ -1,6 +1,13 @@
 import { Icon } from '@iconify/react'
 import { CodeBlock } from '../components/ui/CodeBlock'
 import { useState } from 'react'
+import { 
+  Section, 
+  Container, 
+  Stack, 
+  Grid,
+  Badge
+} from '../components/ui'
 
 export function ContainerQueries() {
   const [containerWidth, setContainerWidth] = useState(400)
@@ -211,25 +218,33 @@ export function ContainerQueries() {
   }
 
   return (
-    <div className="page-container">
-      <div className="page-header">
-        <div className="page-header__content">
-          <div className="page-header__icon">
-            <Icon icon="mdi:crop-free" />
-          </div>
-          <div className="page-header__text">
-            <h1 className="page-header__title">CSS Container Queries</h1>
-            <p className="page-header__subtitle">
-              Element-based responsive design that adapts to container size, not viewport size
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="page-content">
+    <div className="page-transition-container">
+      {/* Hero Section */}
+      <Section variant="hero" size="lg">
+        <Container size="wide">
+          <Stack gap="xl" align="center">
+            <Icon icon="mdi:crop-free" className="text-6xl" />
+            <Section.Header centered>
+              <Section.Title size="3xl" gradient>
+                CSS Container Queries
+              </Section.Title>
+              <Section.Subtitle>
+                Element-based responsive design that adapts to container size, not viewport size
+              </Section.Subtitle>
+            </Section.Header>
+          </Stack>
+        </Container>
+      </Section>
         {/* Container Queries Explanation */}
-        <section className="content-section">
-          <h2 className="section-title">Why Container Queries?</h2>
+        <Section variant="content" size="lg">
+          <Container size="wide">
+            <Section.Header>
+              <Badge variant="primary" icon="mdi:help-circle">
+                Benefits
+              </Badge>
+              <Section.Title size="xl">Why Container Queries?</Section.Title>
+            </Section.Header>
+            <Section.Content>
           <div className="explanation-grid">
             <div className="explanation-card">
               <div className="explanation-card__header">
@@ -262,11 +277,20 @@ export function ContainerQueries() {
               </p>
             </div>
           </div>
-        </section>
+            </Section.Content>
+          </Container>
+        </Section>
 
         {/* Interactive Demo Controls */}
-        <section className="content-section">
-          <h2 className="section-title">Interactive Container Query Demo</h2>
+        <Section variant="feature" size="lg">
+          <Container size="wide">
+            <Section.Header>
+              <Badge variant="success" icon="mdi:play">
+                Interactive Demo
+              </Badge>
+              <Section.Title size="xl">Interactive Container Query Demo</Section.Title>
+            </Section.Header>
+            <Section.Content>
           <div className="demo-controls">
             <div className="demo-control-group">
               <label htmlFor="container-width" className="demo-label">
@@ -398,11 +422,20 @@ export function ContainerQueries() {
               </p>
             </div>
           </div>
-        </section>
+            </Section.Content>
+          </Container>
+        </Section>
 
         {/* CSS Code Examples */}
-        <section className="content-section">
-          <h2 className="section-title">CSS Implementation</h2>
+        <Section variant="content" size="lg">
+          <Container size="wide">
+            <Section.Header>
+              <Badge variant="warning" icon="mdi:code-tags">
+                Implementation
+              </Badge>
+              <Section.Title size="xl">CSS Implementation</Section.Title>
+            </Section.Header>
+            <Section.Content>
           <div className="code-demo">
             <h3 className="code-demo__title">{demos[selectedDemo].title}</h3>
             <p className="code-demo__description">{demos[selectedDemo].description}</p>
@@ -412,11 +445,20 @@ export function ContainerQueries() {
               showLineNumbers
             />
           </div>
-        </section>
+            </Section.Content>
+          </Container>
+        </Section>
 
         {/* Container Query Syntax */}
-        <section className="content-section">
-          <h2 className="section-title">Container Query Syntax</h2>
+        <Section variant="feature" size="lg">
+          <Container size="wide">
+            <Section.Header>
+              <Badge variant="info" icon="mdi:format-text">
+                Syntax Guide
+              </Badge>
+              <Section.Title size="xl">Container Query Syntax</Section.Title>
+            </Section.Header>
+            <Section.Content>
           <div className="syntax-grid">
             <div className="syntax-card">
               <h3 className="syntax-card__title">
@@ -518,11 +560,20 @@ function App() {
               />
             </div>
           </div>
-        </section>
+            </Section.Content>
+          </Container>
+        </Section>
 
         {/* Browser Support */}
-        <section className="content-section">
-          <h2 className="section-title">Browser Support & Fallbacks</h2>
+        <Section variant="cta" size="lg">
+          <Container size="wide">
+            <Section.Header>
+              <Badge variant="primary" icon="mdi:web">
+                Compatibility
+              </Badge>
+              <Section.Title size="xl">Browser Support & Fallbacks</Section.Title>
+            </Section.Header>
+            <Section.Content>
           <div className="support-info">
             <div className="support-status">
               <h3>Current Support</h3>
@@ -576,8 +627,9 @@ function App() {
               />
             </div>
           </div>
-        </section>
-      </div>
+            </Section.Content>
+          </Container>
+        </Section>
     </div>
   )
 }

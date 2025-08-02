@@ -200,7 +200,7 @@ export function LinkButton({
       {...linkProps}
       className={`button button--${buttonProps.variant || 'primary'} button--${buttonProps.size || 'md'} ${className}`}
     >
-      {buttonProps.loading && <div className="button__spinner" />}
+      {buttonProps.loading && <Icon icon="mdi:loading" className="button__spinner spinning" />}
       
       <div className={`button__content ${buttonProps.loading ? 'button__content--hidden' : ''}`}>
         {buttonProps.icon && buttonProps.iconPosition === 'left' && (
