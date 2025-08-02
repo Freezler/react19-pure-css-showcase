@@ -146,44 +146,91 @@ function FeatureCard({ feature, className }: { feature: FeatureCard; className?:
 function APISupport() {
   const apiSupport = getAPISupport()
   
+  // Split APIs into two bands for the moving effect
+  const apiEntries = Object.entries(apiSupport)
+  const firstBand = apiEntries.slice(0, Math.ceil(apiEntries.length / 2))
+  const secondBand = apiEntries.slice(Math.ceil(apiEntries.length / 2))
+  
+  // Duplicate the arrays to create seamless infinite scroll
+  const firstBandExtended = [...firstBand, ...firstBand, ...firstBand]
+  const secondBandExtended = [...secondBand, ...secondBand, ...secondBand]
+  
   return (
-    <Section variant="feature">
-      <Container>
-        <Section.Header centered>
-          <Section.Title>Browser API Support</Section.Title>
-          <Section.Subtitle>
-            Check which modern web APIs are supported in your browser
-          </Section.Subtitle>
-        </Section.Header>
+    <Section variant="feature" size="lg">
+      <Container size="wide">
+        <div className="api-support-section">
+          <div className="api-support-header">
+            <div className="api-support-badge">
+              <Icon icon="mdi:api" className="api-support-badge__icon" />
+              <span>Live Browser Support</span>
+            </div>
+            <h2 className="api-support-title">
+              Modern <span className="api-support-title__highlight">Web APIs</span>
+            </h2>
+            <p className="api-support-subtitle">
+              Real-time detection of cutting-edge browser capabilities in your current environment
+            </p>
+          </div>
 
-        <Section.Content>
-          <Grid columns="auto-fit" minWidth="200px" gap="md">
-            {Object.entries(apiSupport).map(([api, supported]) => (
-              <Card key={api} variant={supported ? "default" : "default"} className="text-center md:text-left">
-                <Card.Content>
-                  <Stack gap="xs" align="center" className="md:hidden">
+          <div className="api-support-bands">
+            {/* First Band - Moving Right */}
+            <div className="api-band api-band--right">
+              <div className="api-band__track">
+                {firstBandExtended.map(([api, supported], index) => (
+                  <div 
+                    key={`first-${api}-${index}`} 
+                    className={`api-badge ${supported ? 'api-badge--supported' : 'api-badge--unsupported'}`}
+                  >
                     <Icon 
                       icon={supported ? 'mdi:check-circle' : 'mdi:close-circle'} 
-                      className={`text-lg ${supported ? 'text-success' : 'text-error'}`}
+                      className="api-badge__icon"
                     />
-                    <span className="text-sm">
+                    <span className="api-badge__text">
                       {api.replace(/([A-Z])/g, ' $1').trim()}
                     </span>
-                  </Stack>
-                  <Cluster gap="sm" align="center" className="hidden md:flex">
+                    {supported && <div className="api-badge__glow"></div>}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Second Band - Moving Left */}
+            <div className="api-band api-band--left">
+              <div className="api-band__track">
+                {secondBandExtended.map(([api, supported], index) => (
+                  <div 
+                    key={`second-${api}-${index}`} 
+                    className={`api-badge ${supported ? 'api-badge--supported' : 'api-badge--unsupported'}`}
+                  >
                     <Icon 
                       icon={supported ? 'mdi:check-circle' : 'mdi:close-circle'} 
-                      className={supported ? 'text-success' : 'text-error'}
+                      className="api-badge__icon"
                     />
-                    <span>
+                    <span className="api-badge__text">
                       {api.replace(/([A-Z])/g, ' $1').trim()}
                     </span>
-                  </Cluster>
-                </Card.Content>
-              </Card>
-            ))}
-          </Grid>
-        </Section.Content>
+                    {supported && <div className="api-badge__glow"></div>}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="api-support-stats">
+            <div className="api-stat">
+              <div className="api-stat__value">{Object.values(apiSupport).filter(Boolean).length}</div>
+              <div className="api-stat__label">APIs Supported</div>
+            </div>
+            <div className="api-stat">
+              <div className="api-stat__value">{Math.round((Object.values(apiSupport).filter(Boolean).length / Object.keys(apiSupport).length) * 100)}%</div>
+              <div className="api-stat__label">Browser Coverage</div>
+            </div>
+            <div className="api-stat">
+              <div className="api-stat__value">{Object.keys(apiSupport).length}</div>
+              <div className="api-stat__label">Total APIs</div>
+            </div>
+          </div>
+        </div>
       </Container>
     </Section>
   )
@@ -196,55 +243,20 @@ function HeroStats() {
   const supportPercentage = Math.round((totalSupported / totalApis) * 100)
 
   return (
-    <>
-      {/* Mobile: Stack vertically */}
-      <Stack gap="md" align="center" className="sm:hidden">
-        <Card variant="stat" className="w-full max-w-xs">
-          <Card.Content>
-            <div className="stat-number">{totalSupported}/{totalApis}</div>
-            <div className="stat-label">APIs Supported</div>
-          </Card.Content>
-        </Card>
-        
-        <Card variant="stat" className="w-full max-w-xs">
-          <Card.Content>
-            <div className="stat-number">{supportPercentage}%</div>
-            <div className="stat-label">Browser Compatibility</div>
-          </Card.Content>
-        </Card>
-        
-        <Card variant="stat" className="w-full max-w-xs">
-          <Card.Content>
-            <div className="stat-number">{features.length}</div>
-            <div className="stat-label">Feature Categories</div>
-          </Card.Content>
-        </Card>
-      </Stack>
-      
-      {/* Desktop: Grid horizontally */}
-      <Grid columns="auto-fit" minWidth="120px" gap="md" className="justify-center hidden sm:grid">
-        <Card variant="stat">
-          <Card.Content>
-            <div className="stat-number">{totalSupported}/{totalApis}</div>
-            <div className="stat-label">APIs Supported</div>
-          </Card.Content>
-        </Card>
-        
-        <Card variant="stat">
-          <Card.Content>
-            <div className="stat-number">{supportPercentage}%</div>
-            <div className="stat-label">Browser Compatibility</div>
-          </Card.Content>
-        </Card>
-        
-        <Card variant="stat">
-          <Card.Content>
-            <div className="stat-number">{features.length}</div>
-            <div className="stat-label">Feature Categories</div>
-          </Card.Content>
-        </Card>
-      </Grid>
-    </>
+    <div className="features-hero__metrics">
+      <div className="features-metric">
+        <div className="features-metric__value">{totalSupported}<span className="features-metric__slash">/</span>{totalApis}</div>
+        <div className="features-metric__label">APIs Supported</div>
+      </div>
+      <div className="features-metric">
+        <div className="features-metric__value">{supportPercentage}<span className="features-metric__percent">%</span></div>
+        <div className="features-metric__label">Browser Compatible</div>
+      </div>
+      <div className="features-metric">
+        <div className="features-metric__value">{features.length}<span className="features-metric__plus">+</span></div>
+        <div className="features-metric__label">Interactive Demos</div>
+      </div>
+    </div>
   )
 }
 
@@ -677,40 +689,124 @@ jobs:
 export function Features() {
   return (
     <div className="page-transition-container">
-      {/* Hero Section */}
+      {/* Spectacular Hero Section */}
       <Section variant="hero" size="lg">
         <Container size="wide">
-          <Stack gap="xl" align="center">
-            <Icon icon="mdi:rocket" className="hero-icon" />
-            <Section.Header centered>
-              <Section.Title size="3xl" gradient>
-                Modern Web Features
-              </Section.Title>
-              <Section.Subtitle>
-                Explore cutting-edge web technologies, React 19 capabilities, and modern development patterns
-              </Section.Subtitle>
-            </Section.Header>
-
-            <HeroStats />
-          </Stack>
+          <div className="features-hero">
+            <div className="features-hero__background">
+              <div className="features-floating-icons">
+                <Icon icon="logos:react" className="features-floating-icons__react" />
+                <Icon icon="logos:typescript-icon" className="features-floating-icons__ts" />
+                <Icon icon="logos:vitejs" className="features-floating-icons__vite" />
+                <Icon icon="mdi:api" className="features-floating-icons__api" />
+              </div>
+              <div className="features-particles"></div>
+            </div>
+            
+            <div className="features-hero__content">
+              <div className="features-hero__badge">
+                <div className="features-badge">
+                  <div className="features-badge__glow"></div>
+                  <Icon icon="mdi:rocket-launch" className="features-badge__icon" />
+                  <span className="features-badge__text">Interactive Showcase</span>
+                </div>
+              </div>
+              
+              <h1 className="features-hero__title">
+                <span className="features-hero__title-main">Modern Web</span>
+                <span className="features-hero__title-highlight">Technology Showcase</span>
+                <span className="features-hero__title-sub">Interactive Demos</span>
+              </h1>
+              
+              <p className="features-hero__description">
+                Explore React 19 features, modern CSS techniques, and 
+                web APIs through interactive examples and educational demonstrations.
+              </p>
+              
+              <div className="features-hero__actions">
+                <Button variant="primary" size="lg" icon="mdi:play" elevated glowEffect="primary">
+                  Start Interactive Tour
+                </Button>
+                <Button variant="glass" size="lg" icon="mdi:github" className="features-hero__source-btn">
+                  View Source
+                </Button>
+              </div>
+              
+              <HeroStats />
+            </div>
+          </div>
         </Container>
       </Section>
       
 
-      {/* Features Grid */}
-      <Section variant="content">
-        <Container>
-          <Section.Content>
-            <Grid columns="auto-fit" minWidth="300px" gap="xl" className="grid--responsive scroll-stagger">
+      {/* Stunning Features Showcase */}
+      <Section variant="content" size="lg">
+        <Container size="wide">
+          <div className="features-showcase-section">
+            <div className="features-showcase-header">
+              <div className="features-showcase-badge">
+                <Icon icon="mdi:star" className="features-showcase-badge__icon" />
+                <span>Feature Showcase</span>
+              </div>
+              <h2 className="features-showcase-title">
+                Explore <span className="features-showcase-title__highlight">Interactive Demos</span>
+              </h2>
+              <p className="features-showcase-subtitle">
+                Hands-on experience with modern web technologies and React 19 capabilities
+              </p>
+            </div>
+
+            <div className="features-showcase-grid">
               {features.map((feature, index) => (
-                <FeatureCard 
-                  key={feature.id} 
-                  feature={feature}
-                  className={`${index % 2 === 0 ? "scroll-slide-in-left" : "scroll-slide-in-right"} hover-glow`}
-                />
+                <div 
+                  key={feature.id}
+                  className="features-showcase-card"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <Link to={feature.route}>
+                    <div className="features-card-glass">
+                      <div className="features-card-header">
+                        <div className="features-card-icon">
+                          <Icon icon={feature.icon} className="features-card-icon__main" />
+                        </div>
+                        <div className="features-card-status">
+                          <div className={`features-status-badge features-status-badge--${feature.status}`}>
+                            {feature.status}
+                          </div>
+                          <div className="features-compatibility">
+                            <span className="features-compatibility__value">{feature.compatibility}%</span>
+                            <span className="features-compatibility__label">compatible</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="features-card-content">
+                        <h3 className="features-card-title">{feature.title}</h3>
+                        <p className="features-card-description">{feature.description}</p>
+                        
+                        <div className="features-card-highlights">
+                          {feature.highlights.map((highlight, highlightIndex) => (
+                            <div key={highlightIndex} className="features-highlight-tag">
+                              {highlight}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="features-card-footer">
+                        <div className="features-card-arrow">
+                          <span>Explore {feature.title}</span>
+                          <Icon icon="mdi:arrow-right" className="features-card-arrow__icon" />
+                        </div>
+                      </div>
+                      
+                      <div className="features-card-ripple"></div>
+                    </div>
+                  </Link>
+                </div>
               ))}
-            </Grid>
-          </Section.Content>
+            </div>
+          </div>
         </Container>
       </Section>
 

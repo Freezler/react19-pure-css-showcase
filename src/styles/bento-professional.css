@@ -1,59 +1,87 @@
-/* 🎯 PROFESSIONAL BENTO GRID - No Layout Shifts, Perfect Fit */
+/* 🎯 2026 SPACIOUS BENTO GRID - Ultra Modern Layout */
 
 .compiler-demo__bento-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-auto-rows: minmax(180px, auto);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
   width: 100%;
   max-width: 100%;
-  height: 480px; /* Fixed height prevents layout shifts */
-  padding: 1.5rem;
-  background: oklch(from var(--color-surface) l c h / 0.5);
-  border-radius: 1rem;
-  backdrop-filter: blur(20px);
-  border: 1px solid oklch(from var(--color-outline) l c h / 0.3);
+  min-height: auto;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  backdrop-filter: none;
+  border: none;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow: visible;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .compiler-demo__bento-grid-container {
   width: 100%;
-  max-width: 100%;
+  max-width: var(--container-2xl);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
   overflow: hidden;
 }
 
 /* ===== 🚀 HERO AREA - Smart Component Demo ===== */
 .bento-hero {
-  grid-column: 1 / 2;
-  grid-row: 1 / 4;
-  background: linear-gradient(135deg, 
-    oklch(from var(--color-primary) l c h / 0.05) 0%,
-    oklch(from var(--color-accent) l c h / 0.02) 100%
-  );
-  border-radius: 0.75rem;
-  padding: 1.5rem;
+  grid-column: span 1;
+  background: 
+    linear-gradient(135deg, 
+      oklch(from var(--color-primary) l c h / 0.03) 0%,
+      oklch(from var(--color-accent) l c h / 0.01) 100%
+    );
+  border-radius: clamp(1rem, 2vw, 1.5rem);
+  padding: clamp(1.5rem, 3vw, 2rem);
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(20px);
+  border: 1px solid oklch(from var(--color-outline) l c h / 0.1);
+  box-shadow: 
+    0 8px 32px oklch(from var(--color-on-surface) l c h / 0.04),
+    inset 0 1px 0 oklch(from var(--color-surface) l c h / 0.8);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  @media (min-width: 768px) {
+    grid-column: span 2;
+  }
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+      0 20px 40px oklch(from var(--color-on-surface) l c h / 0.08),
+      inset 0 1px 0 oklch(from var(--color-surface) l c h / 0.9);
+  }
 }
 
 .bento-hero__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
   flex-shrink: 0;
 }
 
 .bento-hero__title {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
+  gap: var(--space-sm);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 500;
   color: var(--color-on-surface);
+  letter-spacing: -0.01em;
 }
 
 .bento-hero__badge {
@@ -82,27 +110,39 @@
 
 /* ===== 📊 METRICS - Performance Stats ===== */
 .bento-metrics {
-  grid-column: 2 / 4;
-  grid-row: 1 / 2;
   background: linear-gradient(135deg,
-    oklch(from var(--color-secondary) l c h / 0.05) 0%,
-    oklch(from var(--color-primary) l c h / 0.02) 100%
+    oklch(from var(--color-secondary) l c h / 0.03) 0%,
+    oklch(from var(--color-primary) l c h / 0.01) 100%
   );
-  border-radius: 0.75rem;
-  padding: 1rem;
+  border-radius: clamp(1rem, 2vw, 1.5rem);
+  padding: clamp(1.5rem, 3vw, 2rem);
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--space-lg);
+  backdrop-filter: blur(20px);
+  border: 1px solid oklch(from var(--color-outline) l c h / 0.1);
+  box-shadow: 
+    0 8px 32px oklch(from var(--color-on-surface) l c h / 0.04),
+    inset 0 1px 0 oklch(from var(--color-surface) l c h / 0.8);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+      0 20px 40px oklch(from var(--color-on-surface) l c h / 0.08),
+      inset 0 1px 0 oklch(from var(--color-surface) l c h / 0.9);
+  }
 }
 
 .bento-metrics__header {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
+  gap: var(--space-sm);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 500;
   color: var(--color-on-surface);
   flex-shrink: 0;
+  letter-spacing: -0.01em;
 }
 
 .bento-metrics__grid {
@@ -114,16 +154,23 @@
 }
 
 .metric-card {
-  background: oklch(from var(--color-surface) l c h / 0.6);
-  border-radius: 0.5rem;
-  padding: 0.75rem;
+  background: oklch(from var(--color-surface) l c h / 0.8);
+  border-radius: clamp(0.75rem, 1.5vw, 1rem);
+  padding: clamp(1rem, 2vw, 1.5rem);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem;
+  gap: var(--space-xs);
   text-align: center;
-  border: 1px solid oklch(from var(--color-outline) l c h / 0.1);
+  border: 1px solid oklch(from var(--color-outline) l c h / 0.15);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  &:hover {
+    transform: translateY(-2px) scale(1.02);
+    background: oklch(from var(--color-surface) l c h / 0.9);
+  }
 }
 
 .metric-card__value {

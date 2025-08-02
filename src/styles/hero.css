@@ -134,7 +134,7 @@
   width: 100%;
 }
 
-/* Tablet breakpoint - single column with better code preview */
+/* Tablet breakpoint - optimized single column layout */
 @media (min-width: 768px) and (max-width: 1023px) {
   .hero {
     padding: var(--space-lg);
@@ -153,11 +153,13 @@
   .hero__code-preview {
     max-width: 100%;
     margin: 0 auto;
+    transform: scale(1.05); /* Slightly larger on tablet */
   }
   
   .hero__code-content {
-    font-size: var(--text-xs);
-    padding: var(--space-md);
+    font-size: var(--text-sm); /* Better size for tablet */
+    padding: var(--space-lg);
+    line-height: 1.7;
   }
   
   .hero__actions {
@@ -174,7 +176,7 @@
   }
 }
 
-/* Desktop: Switch to grid layout */
+/* Desktop: Switch to optimized grid layout */
 @media (min-width: 1024px) {
   .hero {
     padding: var(--space-xl);
@@ -183,14 +185,17 @@
   
   .hero__content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-3xl);
+    grid-template-columns: 1.2fr 1fr; /* Give more space to content, less to code */
+    gap: var(--space-2xl);
     padding: var(--space-xl);
     text-align: left;
+    align-items: center;
   }
   
   .hero__code-preview {
     max-width: 100%;
+    transform: scale(1.1); /* Make code example larger */
+    transform-origin: center;
   }
   
   .hero__actions {
@@ -353,43 +358,75 @@
 }
 
 .hero__stat-number {
-  font-size: var(--text-2xl);
+  font-size: var(--text-lg); /* Mobile-friendly size */
   font-weight: 700;
   color: var(--color-primary);
-  line-height: 1.2; /* Consistent line height for better spacing */
-  margin-bottom: var(--space-xs); /* Consistent spacing */
-  min-height: 1.2em; /* Ensure consistent height regardless of content */
+  line-height: 1.1;
+  margin-bottom: 2px; /* Minimal spacing for mobile */
+  min-height: 1.1em;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .hero__stat-label {
-  font-size: var(--text-sm);
+  font-size: 10px; /* Very small for mobile fit */
   color: var(--color-on-surface-variant);
-  line-height: 1.4; /* Consistent line height */
-  min-height: 1.4em; /* Ensure consistent height */
+  line-height: 1.2;
+  min-height: 1.2em;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  font-weight: 600; /* Bolder for tiny text readability */
+  letter-spacing: 0.02em; /* Better legibility at small size */
 }
 
-/* ===== MODERN HERO STATS - Revolutionary Container Queries ===== */
+/* Responsive text sizing for larger screens */
+@container hero-stats (min-width: 360px) {
+  .hero__stat-number {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-xs);
+  }
+  
+  .hero__stat-label {
+    font-size: var(--text-xs);
+    letter-spacing: normal;
+  }
+}
+
+@container hero-stats (min-width: 500px) {
+  .hero__stat--modern {
+    padding: var(--space-md) var(--space-lg);
+    max-width: 140px;
+    border-radius: var(--radius-lg);
+  }
+}
+
+/* ===== MODERN HERO STATS - Always Inline & Perfectly Responsive ===== */
 .hero__stats--modern {
   container-type: inline-size;
   container-name: hero-stats;
-  gap: var(--space-lg);
   
-  /* Default: Single column stack for small containers */
-  flex-direction: column;
+  /* Always inline - even on mobile for better UX */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
+  flex-wrap: nowrap; /* No wrapping, keep inline */
+  gap: var(--space-xs); /* Very small gap for mobile */
+  margin-top: var(--space-lg);
 }
 
 /* Container query responsive behavior for hero stats */
-@container hero-stats (min-width: 300px) {
+@container hero-stats (min-width: 280px) {
   .hero__stats--modern {
-    flex-direction: row;
-    justify-content: center;
+    gap: var(--space-sm);
+  }
+}
+
+@container hero-stats (min-width: 360px) {
+  .hero__stats--modern {
     gap: var(--space-md);
   }
 }
@@ -406,16 +443,24 @@
   }
 }
 
+@container hero-stats (min-width: 900px) {
+  .hero__stats--modern {
+    gap: var(--space-2xl);
+  }
+}
+
 .hero__stat--modern {
   background: oklch(from var(--color-surface-variant) calc(l + 0.02) c h / 0.6);
   backdrop-filter: blur(16px) saturate(1.4);
   border: 1px solid oklch(from var(--color-outline) l c h / 0.2);
-  border-radius: var(--radius-xl);
-  padding: var(--space-lg);
+  border-radius: var(--radius-md); /* Smaller radius for mobile */
+  padding: var(--space-sm) var(--space-md); /* Compact mobile padding */
   transition: all var(--transition-normal);
   position: relative;
   overflow: hidden;
-  min-width: 120px;
+  min-width: 80px; /* Even smaller for mobile */
+  flex: 1; /* Allow flexible sizing */
+  max-width: 120px; /* Smaller max for mobile fit */
   
   /* Modern glassmorphic shadow */
   box-shadow: 
@@ -452,9 +497,24 @@
 }
 
 .hero__stat-icon {
-  font-size: var(--font-size-2xl);
-  margin-bottom: var(--space-sm);
+  font-size: var(--text-lg); /* Smaller for mobile */
+  margin-bottom: 2px; /* Minimal spacing for mobile */
   transition: all var(--transition-fast);
+}
+
+/* Responsive icon sizing */
+@container hero-stats (min-width: 360px) {
+  .hero__stat-icon {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-xs);
+  }
+}
+
+@container hero-stats (min-width: 500px) {
+  .hero__stat-icon {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-sm);
+  }
 }
 
 .hero__stat--performance .hero__stat-icon {
@@ -495,6 +555,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+}
+
+/* Desktop visual positioning */
+@media (min-width: 1024px) {
+  .hero__visual {
+    justify-content: flex-start; /* Align to start for better side positioning */
+    padding-left: var(--space-md);
+  }
 }
 
 .hero__code-preview {
@@ -555,14 +624,24 @@
 }
 
 .hero__code-content {
-  padding: var(--space-lg);
+  padding: var(--space-xl);
   font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
-  font-size: var(--text-sm);
-  line-height: 1.6;
+  font-size: var(--text-base); /* Larger font size */
+  line-height: 1.8; /* Better line spacing */
   overflow-x: auto;
   text-align: left;
   max-width: 100%;
   box-sizing: border-box;
+  background: oklch(from var(--color-surface) calc(l + 0.01) c h / 0.9);
+}
+
+/* Desktop code content improvements */
+@media (min-width: 1024px) {
+  .hero__code-content {
+    font-size: var(--text-lg); /* Even larger on desktop */
+    padding: var(--space-2xl);
+    line-height: 2;
+  }
 }
 
 .hero__code-line {

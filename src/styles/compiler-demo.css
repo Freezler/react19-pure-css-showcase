@@ -1,60 +1,70 @@
 /* 🧙‍♂️ REACT COMPILER DEMO - Visual Magic Showcase */
 
-/* ===== MAIN CONTAINER ===== */
+/* ===== MAIN CONTAINER - 2026 ULTRA-SPACIOUS ===== */
 .compiler-demo {
-  padding: var(--space-3xl) 0;
-  background: linear-gradient(
-    180deg,
-    var(--color-surface) 0%,
-    oklch(from var(--color-primary) l c h / 0.02) 50%,
-    var(--color-surface) 100%
-  );
+  padding: clamp(4rem, 12vw, 8rem) 0;
+  background: 
+    radial-gradient(ellipse at center top, oklch(from var(--color-primary) l c h / 0.03) 0%, transparent 70%),
+    var(--color-surface);
   position: relative;
   overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   &::before {
     content: "";
     position: absolute;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1200px;
-    height: 3px;
+    left: 0;
+    right: 0;
+    height: 1px;
     background: linear-gradient(
       90deg,
-      transparent,
-      var(--color-primary),
-      var(--color-accent),
-      var(--color-secondary),
-      transparent
+      transparent 0%,
+      oklch(from var(--color-primary) l c h / 0.2) 20%,
+      oklch(from var(--color-accent) l c h / 0.3) 50%,
+      oklch(from var(--color-secondary) l c h / 0.2) 80%,
+      transparent 100%
     );
-    animation: shimmer 3s ease-in-out infinite;
+    animation: shimmer 4s ease-in-out infinite;
   }
 }
 
-/* ===== HEADER SECTION ===== */
+/* ===== HEADER SECTION - ULTRA SPACIOUS ===== */
 .compiler-demo__header {
   text-align: center;
-  margin-bottom: var(--space-3xl);
+  margin-bottom: clamp(4rem, 8vw, 6rem);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 var(--space-xl);
 }
 
 .compiler-demo__badge {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-xs);
-  padding: var(--space-sm) var(--space-lg);
-  background: linear-gradient(
-    135deg,
-    oklch(from var(--color-primary) l c h / 0.1) 0%,
-    oklch(from var(--color-accent) l c h / 0.1) 100%
-  );
-  border: 1px solid oklch(from var(--color-primary) l c h / 0.3);
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-xl);
+  background: 
+    linear-gradient(135deg,
+      oklch(from var(--color-primary) l c h / 0.08) 0%,
+      oklch(from var(--color-accent) l c h / 0.06) 100%
+    );
+  border: 1px solid oklch(from var(--color-primary) l c h / 0.15);
   border-radius: var(--radius-full);
-  font-size: var(--text-sm);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--text-base);
+  font-weight: 500;
   color: var(--color-primary);
-  margin-bottom: var(--space-lg);
-  animation: glow-pulse 2s ease-in-out infinite;
+  margin-bottom: var(--space-2xl);
+  backdrop-filter: blur(12px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px oklch(from var(--color-primary) l c h / 0.12);
+  }
 }
 
 .compiler-demo__badge-icon {
@@ -63,40 +73,47 @@
 }
 
 .compiler-demo__title {
-  font-size: var(--text-3xl);
-  font-weight: var(--font-weight-bold);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
   color: var(--color-on-surface);
-  margin-bottom: var(--space-md);
-  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-xl);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variation-settings: 'wght' 300, 'slnt' 0;
 }
 
 .compiler-demo__subtitle {
-  font-size: var(--text-lg);
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
   color: var(--color-on-surface-variant);
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
-  line-height: var(--line-height-relaxed);
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: 0.01em;
 }
 
-/* ===== BENTO GRID CONTAINER ===== */
+/* ===== BENTO GRID CONTAINER - 2026 FLOATING DESIGN ===== */
 .compiler-demo__bento-grid {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-  padding: var(--space-xl);
-  background: linear-gradient(
-    135deg,
-    var(--color-surface) 0%,
-    var(--color-surface-variant) 100%
-  );
-  border: 1px solid var(--color-outline);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-sm),
-    inset 0 1px 0 var(--color-surface);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: clamp(2rem, 4vw, 3rem);
+  padding: clamp(3rem, 6vw, 5rem) var(--space-xl);
+  background: 
+    linear-gradient(135deg, 
+      oklch(from var(--color-surface) l c h / 0.95) 0%,
+      oklch(from var(--color-surface-variant) l c h / 0.98) 100%
+    );
+  border: 1px solid oklch(from var(--color-outline) l c h / 0.15);
+  border-radius: clamp(1.5rem, 3vw, 2.5rem);
+  box-shadow: 
+    0 8px 32px oklch(from var(--color-on-surface) l c h / 0.04),
+    0 1px 2px oklch(from var(--color-on-surface) l c h / 0.08),
+    inset 0 1px 0 oklch(from var(--color-surface) l c h / 0.8);
+  backdrop-filter: blur(20px);
   position: relative;
-  transition: all var(--transition-normal);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   container-type: inline-size;
-  max-width: var(--container-xl);
+  max-width: var(--container-2xl);
   margin: 0 auto;
 
   &.optimizing {

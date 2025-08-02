@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react'
 import { Link } from '@tanstack/react-router'
 import { Hero } from '../components/Hero'
 import { CompilerDemo } from '../components/CompilerDemo'
-import { Section, Button, Tag, Badge } from '../components/ui'
+import { Section, Button, Tag, Badge, Container, Grid, Card } from '../components/ui'
 import { useScrollRevealAll } from '../hooks/useScrollReveal'
 import { useScrollAnimations } from '../hooks/useScrollAnimations'
 
@@ -52,20 +52,20 @@ export function Home() {
         <CompilerDemo />
       </div>
 
-      {/* Features section - using design system classes */}
-      <section className="section section--feature section--lg scroll-reveal">
-        <div className="container container--wide">
-          <div className="section__header section__header--centered">
-            <h2 className="section__title section__title--xl scroll-title-reveal">
+      {/* Features section - using design system */}
+      <Section variant="feature" size="lg" className="scroll-reveal">
+        <Container size="wide">
+          <Section.Header centered>
+            <Section.Title size="xl" className="scroll-title-reveal">
               Why Choose <span style={{ color: 'var(--color-accent)' }}>React 19</span>?
-            </h2>
-            <p className="section__subtitle scroll-title-reveal">
+            </Section.Title>
+            <Section.Subtitle className="scroll-title-reveal">
               Discover the powerful features that make modern web development faster, safer, and more enjoyable.
-            </p>
-          </div>
+            </Section.Subtitle>
+          </Section.Header>
 
-          <div className="section__content">
-            <div className="features-grid features-grid--container-responsive scroll-stagger-cards">
+          <Section.Content>
+            <Grid columns="auto-fit" minWidth="280px" gap="xl" className="scroll-stagger-cards">
               {features.map((feature, index) => {
                 const getFeatureLink = (id: string) => {
                   switch(id) {
@@ -81,155 +81,146 @@ export function Home() {
                 <Link 
                   key={feature.id}
                   to={getFeatureLink(feature.id)}
-                  className="card card--feature hover-glow card-link"
+                  className="card-link"
                 >
-                  <div className="card__header">
-                    <Icon 
-                      icon={feature.icon} 
-                      className="card__icon card__icon--feature"
-                    />
-                    <h3 className="card__title card__title--lg">{feature.title}</h3>
-                  </div>
+                  <Card variant="feature" size="lg" interactive>
+                    <Card.Header icon={feature.icon}>
+                      <Card.Title size="lg">{feature.title}</Card.Title>
+                    </Card.Header>
 
-                  <div className="card__content">
-                    <p className="card__description">{feature.description}</p>
-                  </div>
+                    <Card.Content>
+                      <Card.Description>{feature.description}</Card.Description>
+                    </Card.Content>
 
-                  <div className="card__footer">
-                    <Tag.List
-                      tags={feature.tags.map((tag, tagIndex) => ({
-                        id: `${feature.id}-${tagIndex}`,
-                        label: tag
-                      }))}
-                      variant="primary"
-                      size="xs"
-                    />
-                  </div>
+                    <Card.Footer>
+                      <Tag.List
+                        tags={feature.tags.map((tag, tagIndex) => ({
+                          id: `${feature.id}-${tagIndex}`,
+                          label: tag
+                        }))}
+                        variant="primary"
+                        size="xs"
+                      />
+                    </Card.Footer>
+                  </Card>
                 </Link>
               )})
               }
-            </div>
-          </div>
-        </div>
-      </section>
+            </Grid>
+          </Section.Content>
+        </Container>
+      </Section>
 
       {/* Explore Our Showcase section - Using Design System */}
-      <section className="section section--showcase section--lg scroll-reveal">
-
-        <div className="container container--wide">
-          <div className="section__header section__header--centered">
-            <h2 className="section__title section__title--xl scroll-title-reveal">
+      <Section variant="showcase" size="lg" className="scroll-reveal">
+        <Container size="wide">
+          <Section.Header centered>
+            <Section.Title size="xl" className="scroll-title-reveal">
               Explore Our <span className="text-accent">Showcase</span>
-            </h2>
-            <p className="section__subtitle scroll-title-reveal">
+            </Section.Title>
+            <Section.Subtitle className="scroll-title-reveal">
               Dive deep into our comprehensive examples, documentation, and interactive demos. 
               Each section is crafted to demonstrate real-world applications of modern web development.
-            </p>
-          </div>
+            </Section.Subtitle>
+          </Section.Header>
 
-          <div className="section__content">
-            <div className="showcase-grid showcase-grid--container-responsive scroll-stagger-cards">
+          <Section.Content>
+            <Grid columns="auto-fit" minWidth="320px" gap="xl" className="scroll-stagger-cards">
             
             {/* Card 1 - Tech Stack */}
-            <div className="card card--showcase hover-glow">
-              <div className="card__header">
-                <Icon 
-                  icon="mdi:cog-outline" 
-                  className="card__icon card__icon--showcase card__icon--primary"
-                />
-                <h3 className="card__title card__title--lg">Tech Stack Deep Dive</h3>
-              </div>
+            <Card variant="showcase" size="lg" interactive>
+              <Card.Header icon="mdi:cog-outline">
+                <Card.Title size="lg">Tech Stack Deep Dive</Card.Title>
+              </Card.Header>
               
-              <div className="card__content">
-                <p className="card__description">
+              <Card.Content>
+                <Card.Description>
                   Explore React 19's features, modern CSS techniques, and the development ecosystem powering this showcase.
-                </p>
-              </div>
+                </Card.Description>
+              </Card.Content>
               
-              <div className="showcase-links">
-                <Link to="/react19" className="showcase-link">
-                  <Icon icon="mdi:react" />
-                  <span>React 19 Features</span>
-                </Link>
-                <Link to="/design" className="showcase-link">
-                  <Icon icon="mdi:palette-advanced" />
-                  <span>Design System</span>
-                </Link>
-                <Link to="/apis" className="showcase-link">
-                  <Icon icon="mdi:application-cog" />
-                  <span>Advanced APIs</span>
-                </Link>
-              </div>
-            </div>
+              <Card.Footer>
+                <div className="showcase-links">
+                  <Link to="/react19" className="showcase-link">
+                    <Icon icon="mdi:react" />
+                    <span>React 19 Features</span>
+                  </Link>
+                  <Link to="/design" className="showcase-link">
+                    <Icon icon="mdi:palette-advanced" />
+                    <span>Design System</span>
+                  </Link>
+                  <Link to="/apis" className="showcase-link">
+                    <Icon icon="mdi:application-cog" />
+                    <span>Advanced APIs</span>
+                  </Link>
+                </div>
+              </Card.Footer>
+            </Card>
 
             {/* Card 2 - Interactive Examples */}
-            <div className="card card--showcase hover-glow">
-              <div className="card__header">
-                <Icon 
-                  icon="mdi:cube-outline" 
-                  className="card__icon card__icon--showcase card__icon--secondary"
-                />
-                <h3 className="card__title card__title--lg">Interactive Examples</h3>
-              </div>
+            <Card variant="showcase" size="lg" interactive>
+              <Card.Header icon="mdi:cube-outline">
+                <Card.Title size="lg">Interactive Examples</Card.Title>
+              </Card.Header>
               
-              <div className="card__content">
-                <p className="card__description">
+              <Card.Content>
+                <Card.Description>
                   See these technologies in action with live, interactive demonstrations. Play with components, test features, and experience the difference.
-                </p>
-              </div>
+                </Card.Description>
+              </Card.Content>
               
-              <div className="showcase-links">
-                <Link to="/features" className="showcase-link">
-                  <Icon icon="mdi:view-dashboard" />
-                  <span>Interactive Demos</span>
-                </Link>
-                <Link to="/container-queries" className="showcase-link">
-                  <Icon icon="mdi:crop-free" />
-                  <span>Container Queries</span>
-                </Link>
-                <Link to="/example" className="showcase-link">
-                  <Icon icon="mdi:toy-brick" />
-                  <span>Component Library</span>
-                </Link>
-              </div>
-            </div>
+              <Card.Footer>
+                <div className="showcase-links">
+                  <Link to="/features" className="showcase-link">
+                    <Icon icon="mdi:view-dashboard" />
+                    <span>Interactive Demos</span>
+                  </Link>
+                  <Link to="/container-queries" className="showcase-link">
+                    <Icon icon="mdi:crop-free" />
+                    <span>Container Queries</span>
+                  </Link>
+                  <Link to="/example" className="showcase-link">
+                    <Icon icon="mdi:toy-brick" />
+                    <span>Component Library</span>
+                  </Link>
+                </div>
+              </Card.Footer>
+            </Card>
 
             {/* Card 3 - Resources & Guides */}
-            <div className="card card--showcase hover-glow">
-              <div className="card__header">
-                <Icon 
-                  icon="mdi:library" 
-                  className="card__icon card__icon--showcase card__icon--accent"
-                />
-                <h3 className="card__title card__title--lg">Resources & Guides</h3>
-              </div>
+            <Card variant="showcase" size="lg" interactive>
+              <Card.Header icon="mdi:library">
+                <Card.Title size="lg">Resources & Guides</Card.Title>
+              </Card.Header>
               
-              <div className="card__content">
-                <p className="card__description">
+              <Card.Content>
+                <Card.Description>
                   Comprehensive documentation, implementation guides, and insights into the architectural decisions behind this modern React application.
-                </p>
-              </div>
+                </Card.Description>
+              </Card.Content>
               
-              <div className="showcase-links">
-                <Link to="/performance" className="showcase-link">
-                  <Icon icon="mdi:speedometer" />
-                  <span>Performance</span>
-                </Link>
-                <Link to="/accessibility" className="showcase-link">
-                  <Icon icon="mdi:account-multiple" />
-                  <span>Accessibility</span>
-                </Link>
-                <Link to="/about" className="showcase-link">
-                  <Icon icon="mdi:file-document-outline" />
-                  <span>About</span>
-                </Link>
-              </div>
-            </div>
+              <Card.Footer>
+                <div className="showcase-links">
+                  <Link to="/performance" className="showcase-link">
+                    <Icon icon="mdi:speedometer" />
+                    <span>Performance</span>
+                  </Link>
+                  <Link to="/accessibility" className="showcase-link">
+                    <Icon icon="mdi:account-multiple" />
+                    <span>Accessibility</span>
+                  </Link>
+                  <Link to="/about" className="showcase-link">
+                    <Icon icon="mdi:file-document-outline" />
+                    <span>About</span>
+                  </Link>
+                </div>
+              </Card.Footer>
+            </Card>
 
-            </div>
-          </div>
-        </div>
-      </section>
+            </Grid>
+          </Section.Content>
+        </Container>
+      </Section>
 
       {/* CTA section - refactored with design system */}
       <section className="section section--cta section--lg">

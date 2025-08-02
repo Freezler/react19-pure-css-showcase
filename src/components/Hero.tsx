@@ -83,12 +83,12 @@ export function Hero() {
           </div>
 
           <h1 className="hero__title">
-            Build the Future with <span className="hero__title-accent">Modern React</span>
+            Learn <span className="hero__title-accent">Modern React</span> Development
           </h1>
 
           <p className="hero__description">
-            Experience modern web development with React 19, TypeScript, and current tools. 
-            Create fast, accessible, and beautiful applications that users love.
+            Explore React 19 features, TypeScript patterns, and modern web development techniques. 
+            See how to build fast, accessible, and well-designed applications.
           </p>
 
           <div className="hero__actions">
