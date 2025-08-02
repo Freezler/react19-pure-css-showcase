@@ -107,7 +107,7 @@ export function Button({
       disabled={disabled || loading}
       {...props}
     >
-      {loading && <div className="button__spinner" />}
+      {loading && <Icon icon="mdi:loading" className="button__spinner spinning" />}
       
       <div className={`button__content ${loading ? 'button__content--hidden' : ''}`}>
         {icon && iconPosition === 'left' && (

@@ -691,13 +691,126 @@
   }
 }
 
+/* ===== FEATURES GRID WITH CONTAINER QUERIES ===== */
+.features-grid {
+  display: grid;
+  gap: var(--space-xl);
+  container-type: inline-size;
+  container-name: features;
+  
+  /* Default: Single column for smallest containers */
+  grid-template-columns: 1fr;
+}
+
+/* Container query responsive behavior for features */
+@container features (min-width: 400px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+}
+
+@container features (min-width: 800px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+}
+
+@container features (min-width: 1200px) {
+  .features-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-xl);
+  }
+}
+
+/* Enhanced responsive variant with subgrid support for features */
+.features-grid--container-responsive {
+  /* Enable subgrid when supported for perfect alignment */
+  grid-template-rows: subgrid;
+  
+  /* Fallback for browsers without subgrid */
+  @supports not (grid-template-rows: subgrid) {
+    align-items: stretch;
+  }
+}
+
+/* Fine-tuned responsive adjustments */
+@container features (max-width: 350px) {
+  .features-grid {
+    gap: var(--space-md);
+  }
+  
+  .features-grid .card--feature {
+    padding: var(--space-md);
+  }
+}
+
+@container features (min-width: 1400px) {
+  .features-grid {
+    gap: var(--space-2xl);
+  }
+  
+  .features-grid .card--feature {
+    padding: var(--space-lg);
+  }
+}
+
+/* ===== SHOWCASE GRID WITH CONTAINER QUERIES ===== */
 .showcase-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-xl);
+  container-type: inline-size;
+  container-name: showcase;
+  
+  /* Default: Single column for smallest containers */
+  grid-template-columns: 1fr;
+}
 
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
+/* Container query responsive behavior */
+@container showcase (min-width: 600px) {
+  .showcase-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@container showcase (min-width: 900px) {
+  .showcase-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Enhanced responsive variant with subgrid support */
+.showcase-grid--container-responsive {
+  /* Enable subgrid when supported for perfect alignment */
+  grid-template-rows: subgrid;
+  
+  /* Fallback for browsers without subgrid */
+  @supports not (grid-template-rows: subgrid) {
+    align-items: start;
+  }
+}
+
+/* Responsive adjustments with container queries */
+@container showcase (max-width: 500px) {
+  .showcase-grid {
+    gap: var(--space-lg);
+  }
+  
+  .showcase-grid .card--showcase {
+    min-height: 250px;
+    padding: var(--space-md);
+  }
+}
+
+@container showcase (min-width: 1200px) {
+  .showcase-grid {
+    gap: var(--space-2xl);
+  }
+  
+  .showcase-grid .card--showcase {
+    min-height: 350px;
+    padding: var(--space-xl);
   }
 }
 

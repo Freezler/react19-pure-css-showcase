@@ -85,7 +85,7 @@ const features: FeatureCard[] = [
     icon: 'mdi:accessibility',
     route: '/about',
     status: 'experimental',
-    compatibility: 100,
+    compatibility: 95,
     highlights: ['WCAG 2.2 AA', 'Screen Readers', 'Keyboard Navigation', 'Focus Management']
   }
 ]

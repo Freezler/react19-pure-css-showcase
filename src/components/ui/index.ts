@@ -50,7 +50,7 @@ export { Section }
 export type {
   BadgeProps, CountBadgeProps, TagListProps, TagProps, LabelProps, StatusLabelProps
 } from './Tag'
-export { Badge, Tag, Label }
+export { Badge, Tag, Label } from './Tag'
 
 // CodeBlock component
 export { CodeBlock } from './CodeBlock'

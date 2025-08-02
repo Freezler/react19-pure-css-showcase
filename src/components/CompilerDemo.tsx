@@ -143,9 +143,16 @@ export function CompilerDemo() {
               onClick={handleIncrement}
               disabled={isOptimizing}
             >
-              {isOptimizing && <Icon icon="mdi:loading" className="spinning" />}
-              <span className="bento-button__counter">{count}</span>
-              <span className="bento-button__label">{isOptimizing ? 'Optimizing...' : 'Click to increment'}</span>
+              <span className="bento-button__counter">
+                {isOptimizing ? (
+                  <Icon icon="mdi:loading" className="spinning" />
+                ) : (
+                  count
+                )}
+              </span>
+              <span className="bento-button__label">
+                {isOptimizing ? 'Optimizing...' : 'Click to increment'}
+              </span>
             </button>
           </div>
 

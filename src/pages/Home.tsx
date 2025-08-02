@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react'
+import { Link } from '@tanstack/react-router'
 import { Hero } from '../components/Hero'
 import { CompilerDemo } from '../components/CompilerDemo'
 import { Section, Button, Tag, Badge } from '../components/ui'
@@ -14,7 +15,7 @@ export function Home() {
     {
       id: 'architecture',
       title: 'Modern Architecture',
-      description: 'Built with React 19, TypeScript, and cutting-edge tooling for unmatched performance and developer experience.',
+      description: 'Built with React 19, TypeScript, and modern tooling for improved performance and developer experience.',
       icon: 'mdi:react',
       tags: ['React 19', 'TypeScript', 'Vite 7']
     },
@@ -64,21 +65,28 @@ export function Home() {
           </div>
 
           <div className="section__content">
-            <div className="grid grid--auto-fit-lg grid--gap-xl scroll-stagger-cards">
-              {features.map((feature, index) => (
-                <div 
+            <div className="features-grid features-grid--container-responsive scroll-stagger-cards">
+              {features.map((feature, index) => {
+                const getFeatureLink = (id: string) => {
+                  switch(id) {
+                    case 'architecture': return '/react19'
+                    case 'routing': return '/typescript'
+                    case 'styling': return '/design'
+                    case 'accessibility': return '/accessibility'
+                    default: return '/features'
+                  }
+                }
+                
+                return (
+                <Link 
                   key={feature.id}
-                  className="card card--feature hover-glow"
-                  onClick={() => console.log(`Learn more about ${feature.title}`)}
+                  to={getFeatureLink(feature.id)}
+                  className="card card--feature hover-glow card-link"
                 >
                   <div className="card__header">
                     <Icon 
                       icon={feature.icon} 
-                      style={{ 
-                        fontSize: 'var(--text-2xl)', 
-                        color: 'var(--color-primary)',
-                        marginBottom: 'var(--space-md)'
-                      }} 
+                      className="card__icon card__icon--feature"
                     />
                     <h3 className="card__title card__title--lg">{feature.title}</h3>
                   </div>
@@ -97,8 +105,9 @@ export function Home() {
                       size="xs"
                     />
                   </div>
-                </div>
-              ))}
+                </Link>
+              )})
+              }
             </div>
           </div>
         </div>
@@ -119,41 +128,37 @@ export function Home() {
           </div>
 
           <div className="section__content">
-            <div className="showcase-grid scroll-stagger-cards">
+            <div className="showcase-grid showcase-grid--container-responsive scroll-stagger-cards">
             
             {/* Card 1 - Tech Stack */}
             <div className="card card--showcase hover-glow">
               <div className="card__header">
                 <Icon 
                   icon="mdi:cog-outline" 
-                  style={{ 
-                    fontSize: 'var(--text-2xl)', 
-                    color: 'var(--color-primary)',
-                    marginBottom: 'var(--space-md)'
-                  }} 
+                  className="card__icon card__icon--showcase card__icon--primary"
                 />
                 <h3 className="card__title card__title--lg">Tech Stack Deep Dive</h3>
               </div>
               
               <div className="card__content">
                 <p className="card__description">
-                  Explore React 19's cutting-edge features, modern CSS techniques, and the complete development ecosystem powering this showcase.
+                  Explore React 19's features, modern CSS techniques, and the development ecosystem powering this showcase.
                 </p>
               </div>
               
               <div className="showcase-links">
-                <a href="/react19" className="showcase-link">
+                <Link to="/react19" className="showcase-link">
                   <Icon icon="mdi:react" />
                   <span>React 19 Features</span>
-                </a>
-                <a href="/design" className="showcase-link">
+                </Link>
+                <Link to="/design" className="showcase-link">
                   <Icon icon="mdi:palette-advanced" />
-                  <span>Modern CSS</span>
-                </a>
-                <a href="/apis" className="showcase-link">
+                  <span>Design System</span>
+                </Link>
+                <Link to="/apis" className="showcase-link">
                   <Icon icon="mdi:application-cog" />
                   <span>Advanced APIs</span>
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -162,11 +167,7 @@ export function Home() {
               <div className="card__header">
                 <Icon 
                   icon="mdi:cube-outline" 
-                  style={{ 
-                    fontSize: 'var(--text-2xl)', 
-                    color: 'var(--color-secondary)',
-                    marginBottom: 'var(--space-md)'
-                  }} 
+                  className="card__icon card__icon--showcase card__icon--secondary"
                 />
                 <h3 className="card__title card__title--lg">Interactive Examples</h3>
               </div>
@@ -178,14 +179,18 @@ export function Home() {
               </div>
               
               <div className="showcase-links">
-                <a href="/features" className="showcase-link">
+                <Link to="/features" className="showcase-link">
                   <Icon icon="mdi:view-dashboard" />
-                  <span>Features Showcase</span>
-                </a>
-                <a href="/example" className="showcase-link">
+                  <span>Interactive Demos</span>
+                </Link>
+                <Link to="/container-queries" className="showcase-link">
+                  <Icon icon="mdi:crop-free" />
+                  <span>Container Queries</span>
+                </Link>
+                <Link to="/example" className="showcase-link">
                   <Icon icon="mdi:toy-brick" />
                   <span>Component Library</span>
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -194,11 +199,7 @@ export function Home() {
               <div className="card__header">
                 <Icon 
                   icon="mdi:library" 
-                  style={{ 
-                    fontSize: 'var(--text-2xl)', 
-                    color: 'var(--color-accent)',
-                    marginBottom: 'var(--space-md)'
-                  }} 
+                  className="card__icon card__icon--showcase card__icon--accent"
                 />
                 <h3 className="card__title card__title--lg">Resources & Guides</h3>
               </div>
@@ -210,10 +211,18 @@ export function Home() {
               </div>
               
               <div className="showcase-links">
-                <a href="/about" className="showcase-link">
+                <Link to="/performance" className="showcase-link">
+                  <Icon icon="mdi:speedometer" />
+                  <span>Performance</span>
+                </Link>
+                <Link to="/accessibility" className="showcase-link">
+                  <Icon icon="mdi:account-multiple" />
+                  <span>Accessibility</span>
+                </Link>
+                <Link to="/about" className="showcase-link">
                   <Icon icon="mdi:file-document-outline" />
-                  <span>Documentation</span>
-                </a>
+                  <span>About</span>
+                </Link>
               </div>
             </div>
 
@@ -231,38 +240,41 @@ export function Home() {
                 Ready to Build Something Amazing?
               </h2>
               <p className="section__subtitle">
-                Join thousands of developers creating the future with modern React development.
+                Join the community creating modern applications with React 19 development.
               </p>
             </div>
 
-            <Button.Group orientation="horizontal" spacing="lg">
-              <Button 
-                variant="primary" 
-                size="lg"
-                icon="mdi:rocket-launch"
-                onClick={() => console.log('Start building clicked')}
-              >
-                Start Building
-              </Button>
+            <div className="button-group button-group--horizontal button-group--spacing-lg">
+              <Link to="/features">
+                <Button 
+                  variant="primary" 
+                  size="lg"
+                  icon="mdi:rocket-launch"
+                  elevated
+                  glowEffect="primary"
+                >
+                  Explore Features
+                </Button>
+              </Link>
               <Button 
                 variant="ghost" 
                 size="lg"
                 icon="mdi:github"
-                onClick={() => console.log('GitHub clicked')}
+                onClick={() => window.open('https://github.com', '_blank')}
               >
                 View on GitHub
               </Button>
-            </Button.Group>
+            </div>
 
             <div className="stack stack--gap-sm stack--align-center">
               <div className="cluster cluster--gap-sm cluster--justify-center">
-                <Badge variant="primary" size="sm" shape="pill">React</Badge>
+                <Badge variant="primary" size="sm" shape="pill">React 19</Badge>
                 <Badge variant="secondary" size="sm" shape="pill">TypeScript</Badge>
-                <Badge variant="accent" size="sm" shape="pill">Vite</Badge>
-                <Badge.Count count={1000} variant="success" size="sm" />
+                <Badge variant="accent" size="sm" shape="pill">Vite 7</Badge>
+                <Badge variant="success" size="sm" shape="pill">Container Queries</Badge>
               </div>
               <p className="stats-label">
-                Trusted by <strong>1,000+</strong> developers worldwide
+                <strong>Open Source</strong> demonstration project
               </p>
             </div>
           </div>

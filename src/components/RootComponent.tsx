@@ -154,200 +154,131 @@ export function RootComponent() {
               <li className="navbar__dropdown">
                 <button
                   className="navbar__dropdown-toggle"
-                  popoverTarget="tech-stack-menu"
+                  popoverTarget="react19-menu"
                   type="button"
-                  style={{ anchorName: '--tech-button' } as React.CSSProperties}
+                  style={{ anchorName: '--react19-button' } as React.CSSProperties}
                 >
-                  Tech Stack ▼
+                  React 19 ▼
                 </button>
                 <div
                   className="navbar__popover"
-                  id="tech-stack-menu"
+                  id="react19-menu"
                   popover="auto"
-                  style={{ positionAnchor: '--tech-button' } as React.CSSProperties}
+                  style={{ positionAnchor: '--react19-button' } as React.CSSProperties}
                 >
-                  <div className="popover__grid">
-                    <div className="popover__category">
-                      <h3 className="popover__category-title">Frontend</h3>
-                      <ul className="popover__list">
-                        <li>
-                          <Link to="/react19" className="popover__link" role="menuitem">
-                            <Icon icon="logos:react" className="popover__icon" />
-                            <div className="popover__content">
-                              <span className="popover__title">React 19</span>
-                              <span className="popover__desc">Latest React features</span>
-                            </div>
-                          </Link>
-                        </li>
-                        <li>
-                          <a href="#typescript" className="popover__link" role="menuitem">
-                            <Icon icon="logos:typescript-icon" className="popover__icon" />
-                            <div className="popover__content">
-                              <span className="popover__title">TypeScript</span>
-                              <span className="popover__desc">Type-safe development</span>
-                            </div>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#vite" className="popover__link" role="menuitem">
-                            <Icon icon="logos:vitejs" className="popover__icon" />
-                            <div className="popover__content">
-                              <span className="popover__title">Vite</span>
-                              <span className="popover__desc">Lightning-fast builds</span>
-                            </div>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#router" className="popover__link" role="menuitem">
-                            <Icon icon="mdi:router" className="popover__icon" />
-                            <div className="popover__content">
-                              <span className="popover__title">TanStack Router</span>
-                              <span className="popover__desc">Type-safe routing</span>
-                            </div>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="popover__category">
-                      <h3 className="popover__category-title">Styling</h3>
-                      <ul className="popover__list">
-                        <li>
-                          <Link to="/design" className="popover__link" role="menuitem">
-                            <Icon icon="mdi:palette" className="popover__icon" />
-                            <div className="popover__content">
-                              <span className="popover__title">Modern CSS</span>
-                              <span className="popover__desc">Latest CSS features</span>
-                            </div>
-                          </Link>
-                        </li>
-                        <li>
-                          <a href="#layers" className="popover__link" role="menuitem">
-                            <Icon icon="mdi:layers" className="popover__icon" />
-                            <div className="popover__content">
-                              <span className="popover__title">CSS Layers</span>
-                              <span className="popover__desc">Cascade control</span>
-                            </div>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#container-queries" className="popover__link" role="menuitem">
-                            <Icon icon="mdi:crop-free" className="popover__icon" />
-                            <div className="popover__content">
-                              <span className="popover__title">Container Queries</span>
-                              <span className="popover__desc">Element-based responsive design</span>
-                            </div>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#scope" className="popover__link" role="menuitem">
-                            <Icon icon="mdi:target" className="popover__icon" />
-                            <div className="popover__content">
-                              <span className="popover__title">CSS @scope</span>
-                              <span className="popover__desc">Scoped styling</span>
-                            </div>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="popover__category">
-                      <h3 className="popover__category-title">APIs & Features</h3>
-                      <ul className="popover__list">
-                        <li>
-                          <Link to="/apis" className="popover__link" role="menuitem">
-                            <Icon icon="mdi:api" className="popover__icon" />
-                            <div className="popover__content">
-                              <span className="popover__title">Advanced APIs</span>
-                              <span className="popover__desc">Modern web platform</span>
-                            </div>
-                          </Link>
-                        </li>
-                        <li>
-                          <a href="#web-platform" className="popover__link" role="menuitem">
-                            <Icon icon="mdi:web" className="popover__icon" />
-                            <div className="popover__content">
-                              <span className="popover__title">Web Platform</span>
-                              <span className="popover__desc">Native browser features</span>
-                            </div>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#performance" className="popover__link" role="menuitem">
-                            <Icon icon="mdi:speedometer" className="popover__icon" />
-                            <div className="popover__content">
-                              <span className="popover__title">Performance</span>
-                              <span className="popover__desc">Optimization techniques</span>
-                            </div>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#accessibility" className="popover__link" role="menuitem">
-                            <Icon icon="mdi:account-multiple" className="popover__icon" />
-                            <div className="popover__content">
-                              <span className="popover__title">Accessibility</span>
-                              <span className="popover__desc">Inclusive design</span>
-                            </div>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="popover__category">
-                      <h3 className="popover__category-title">Build & Deploy</h3>
-                      <ul className="popover__list">
-                        <li>
-                          <a href="#vite-build" className="popover__link" role="menuitem">
-                            <Icon icon="logos:vitejs" className="popover__icon" />
-                            <div className="popover__content">
-                              <span className="popover__title">Vite Build</span>
-                              <span className="popover__desc">Optimized production builds</span>
-                            </div>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#github-actions" className="popover__link" role="menuitem">
-                            <Icon icon="mdi:github" className="popover__icon" />
-                            <div className="popover__content">
-                              <span className="popover__title">GitHub Actions</span>
-                              <span className="popover__desc">CI/CD automation</span>
-                            </div>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#deployment" className="popover__link" role="menuitem">
-                            <Icon icon="mdi:rocket-launch" className="popover__icon" />
-                            <div className="popover__content">
-                              <span className="popover__title">Deployment</span>
-                              <span className="popover__desc">Modern hosting solutions</span>
-                            </div>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
+                  <div className="popover__simple">
+                    <ul className="popover__list">
+                      <li>
+                        <Link to="/react19" className="popover__link" role="menuitem">
+                          <Icon icon="logos:react" className="popover__icon" />
+                          <div className="popover__content">
+                            <span className="popover__title">React 19 Features</span>
+                            <span className="popover__desc">Server Components, Actions & more</span>
+                          </div>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/features" className="popover__link" role="menuitem">
+                          <Icon icon="mdi:rocket" className="popover__icon" />
+                          <div className="popover__content">
+                            <span className="popover__title">Interactive Demos</span>
+                            <span className="popover__desc">Try React 19 features live</span>
+                          </div>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/typescript" className="popover__link" role="menuitem">
+                          <Icon icon="logos:typescript-icon" className="popover__icon" />
+                          <div className="popover__content">
+                            <span className="popover__title">TypeScript Integration</span>
+                            <span className="popover__desc">Type-safe React 19 development</span>
+                          </div>
+                        </Link>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </li>
               <li className="navbar__dropdown">
                 <button
                   className="navbar__dropdown-toggle"
-                  popoverTarget="examples-menu"
+                  popoverTarget="development-menu"
                   type="button"
-                  style={{ anchorName: '--examples-button' } as React.CSSProperties}
+                  style={{ anchorName: '--development-button' } as React.CSSProperties}
                 >
-                  Examples ▼
+                  Development ▼
                 </button>
                 <div
                   className="navbar__popover"
-                  id="examples-menu"
+                  id="development-menu"
                   popover="auto"
-                  style={{ positionAnchor: '--examples-button' } as React.CSSProperties}
+                  style={{ positionAnchor: '--development-button' } as React.CSSProperties}
                 >
                   <div className="popover__simple">
                     <ul className="popover__list">
                       <li>
-                        <Link to="/features" className="popover__link" role="menuitem">
-                          <Icon icon="mdi:rocket" className="popover__icon" />
+                        <Link to="/performance" className="popover__link" role="menuitem">
+                          <Icon icon="mdi:speedometer" className="popover__icon" />
                           <div className="popover__content">
-                            <span className="popover__title">Features Showcase</span>
-                            <span className="popover__desc">Interactive feature demos</span>
+                            <span className="popover__title">Performance</span>
+                            <span className="popover__desc">Optimization & Core Web Vitals</span>
+                          </div>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/accessibility" className="popover__link" role="menuitem">
+                          <Icon icon="mdi:account-multiple" className="popover__icon" />
+                          <div className="popover__content">
+                            <span className="popover__title">Accessibility</span>
+                            <span className="popover__desc">WCAG 2.2 & inclusive design</span>
+                          </div>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/apis" className="popover__link" role="menuitem">
+                          <Icon icon="mdi:api" className="popover__icon" />
+                          <div className="popover__content">
+                            <span className="popover__title">Advanced APIs</span>
+                            <span className="popover__desc">Modern web platform APIs</span>
+                          </div>
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li className="navbar__dropdown">
+                <button
+                  className="navbar__dropdown-toggle"
+                  popoverTarget="design-menu"
+                  type="button"
+                  style={{ anchorName: '--design-button' } as React.CSSProperties}
+                >
+                  Design & CSS ▼
+                </button>
+                <div
+                  className="navbar__popover"
+                  id="design-menu"
+                  popover="auto"
+                  style={{ positionAnchor: '--design-button' } as React.CSSProperties}
+                >
+                  <div className="popover__simple">
+                    <ul className="popover__list">
+                      <li>
+                        <Link to="/design" className="popover__link" role="menuitem">
+                          <Icon icon="mdi:palette" className="popover__icon" />
+                          <div className="popover__content">
+                            <span className="popover__title">Design System</span>
+                            <span className="popover__desc">Colors, typography & components</span>
+                          </div>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/container-queries" className="popover__link" role="menuitem">
+                          <Icon icon="mdi:crop-free" className="popover__icon" />
+                          <div className="popover__content">
+                            <span className="popover__title">Container Queries</span>
+                            <span className="popover__desc">Component-based responsive design</span>
                           </div>
                         </Link>
                       </li>
@@ -364,35 +295,14 @@ export function RootComponent() {
                   </div>
                 </div>
               </li>
-              <li className="navbar__dropdown">
-                <button
-                  className="navbar__dropdown-toggle"
-                  popoverTarget="resources-menu"
-                  type="button"
-                  style={{ anchorName: '--resources-button' } as React.CSSProperties}
+              <li>
+                <Link
+                  to="/about"
+                  className="navbar__link"
+                  aria-current={router.location.pathname === '/about' ? 'page' : undefined}
                 >
-                  Resources ▼
-                </button>
-                <div
-                  className="navbar__popover"
-                  id="resources-menu"
-                  popover="auto"
-                  style={{ positionAnchor: '--resources-button' } as React.CSSProperties}
-                >
-                  <div className="popover__simple">
-                    <ul className="popover__list">
-                      <li>
-                        <Link to="/about" className="popover__link" role="menuitem">
-                          <Icon icon="mdi:information" className="popover__icon" />
-                          <div className="popover__content">
-                            <span className="popover__title">About</span>
-                            <span className="popover__desc">Project information</span>
-                          </div>
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                  About
+                </Link>
               </li>
             </ul>
           </nav>
@@ -459,18 +369,6 @@ export function RootComponent() {
               </li>
               <li>
                 <Link
-                  to="/features"
-                  className={`navbar__mobile-link ${isActive('/features') ? 'navbar__mobile-link--active' : ''}`}
-                  onClick={closeMenu}
-                  aria-current={isActive('/features') ? 'page' : undefined}
-                  tabIndex={isMenuOpen ? 0 : -1}
-                >
-                  <Icon icon="mdi:rocket" className="navbar__mobile-icon" aria-hidden="true" />
-                  <span>Features</span>
-                </Link>
-              </li>
-              <li>
-                <Link
                   to="/react19"
                   className={`navbar__mobile-link ${isActive('/react19') ? 'navbar__mobile-link--active' : ''}`}
                   onClick={closeMenu}
@@ -483,6 +381,54 @@ export function RootComponent() {
               </li>
               <li>
                 <Link
+                  to="/features"
+                  className={`navbar__mobile-link ${isActive('/features') ? 'navbar__mobile-link--active' : ''}`}
+                  onClick={closeMenu}
+                  aria-current={isActive('/features') ? 'page' : undefined}
+                  tabIndex={isMenuOpen ? 0 : -1}
+                >
+                  <Icon icon="mdi:rocket" className="navbar__mobile-icon" aria-hidden="true" />
+                  <span>Demos</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/typescript"
+                  className={`navbar__mobile-link ${isActive('/typescript') ? 'navbar__mobile-link--active' : ''}`}
+                  onClick={closeMenu}
+                  aria-current={isActive('/typescript') ? 'page' : undefined}
+                  tabIndex={isMenuOpen ? 0 : -1}
+                >
+                  <Icon icon="logos:typescript-icon" className="navbar__mobile-icon" aria-hidden="true" />
+                  <span>TypeScript</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/performance"
+                  className={`navbar__mobile-link ${isActive('/performance') ? 'navbar__mobile-link--active' : ''}`}
+                  onClick={closeMenu}
+                  aria-current={isActive('/performance') ? 'page' : undefined}
+                  tabIndex={isMenuOpen ? 0 : -1}
+                >
+                  <Icon icon="mdi:speedometer" className="navbar__mobile-icon" aria-hidden="true" />
+                  <span>Performance</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/accessibility"
+                  className={`navbar__mobile-link ${isActive('/accessibility') ? 'navbar__mobile-link--active' : ''}`}
+                  onClick={closeMenu}
+                  aria-current={isActive('/accessibility') ? 'page' : undefined}
+                  tabIndex={isMenuOpen ? 0 : -1}
+                >
+                  <Icon icon="mdi:account-multiple" className="navbar__mobile-icon" aria-hidden="true" />
+                  <span>Accessibility</span>
+                </Link>
+              </li>
+              <li>
+                <Link
                   to="/design"
                   className={`navbar__mobile-link ${isActive('/design') ? 'navbar__mobile-link--active' : ''}`}
                   onClick={closeMenu}
@@ -490,31 +436,19 @@ export function RootComponent() {
                   tabIndex={isMenuOpen ? 0 : -1}
                 >
                   <Icon icon="mdi:palette" className="navbar__mobile-icon" aria-hidden="true" />
-                  <span>Design</span>
+                  <span>Design System</span>
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/apis"
-                  className={`navbar__mobile-link ${isActive('/apis') ? 'navbar__mobile-link--active' : ''}`}
+                  to="/container-queries"
+                  className={`navbar__mobile-link ${isActive('/container-queries') ? 'navbar__mobile-link--active' : ''}`}
                   onClick={closeMenu}
-                  aria-current={isActive('/apis') ? 'page' : undefined}
+                  aria-current={isActive('/container-queries') ? 'page' : undefined}
                   tabIndex={isMenuOpen ? 0 : -1}
                 >
-                  <Icon icon="mdi:api" className="navbar__mobile-icon" aria-hidden="true" />
-                  <span>APIs</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/example"
-                  className={`navbar__mobile-link ${isActive('/example') ? 'navbar__mobile-link--active' : ''}`}
-                  onClick={closeMenu}
-                  aria-current={isActive('/example') ? 'page' : undefined}
-                  tabIndex={isMenuOpen ? 0 : -1}
-                >
-                  <Icon icon="mdi:components" className="navbar__mobile-icon" aria-hidden="true" />
-                  <span>Components</span>
+                  <Icon icon="mdi:crop-free" className="navbar__mobile-icon" aria-hidden="true" />
+                  <span>Container Queries</span>
                 </Link>
               </li>
               <li>

@@ -9,6 +9,10 @@ import { DesignSystem } from './pages/DesignSystem'
 import ExampleRefactored from './pages/ExampleRefactored'
 import { NotFound } from './pages/NotFound'
 import { ModernCSSDemo } from './components/ModernCSSDemo'
+import { TypeScript } from './pages/TypeScript'
+import { Performance } from './pages/Performance'
+import { Accessibility } from './pages/Accessibility'
+import { ContainerQueries } from './pages/ContainerQueries'
 
 // Create root route
 const rootRoute = createRootRoute({
@@ -72,6 +76,34 @@ const modernCSSRoute = createRoute({
   component: ModernCSSDemo,
 })
 
+// Create TypeScript route
+const typeScriptRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/typescript',
+  component: TypeScript,
+})
+
+// Create Performance route
+const performanceRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/performance',
+  component: Performance,
+})
+
+// Create Accessibility route
+const accessibilityRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/accessibility',
+  component: Accessibility,
+})
+
+// Create Container Queries route
+const containerQueriesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/container-queries',
+  component: ContainerQueries,
+})
+
 // Create route tree
 const routeTree = rootRoute.addChildren([
   indexRoute, 
@@ -81,7 +113,11 @@ const routeTree = rootRoute.addChildren([
   designRoute,
   advancedAPIsRoute,
   exampleRoute,
-  modernCSSRoute
+  modernCSSRoute,
+  typeScriptRoute,
+  performanceRoute,
+  accessibilityRoute,
+  containerQueriesRoute
 ])
 
 // Create router
